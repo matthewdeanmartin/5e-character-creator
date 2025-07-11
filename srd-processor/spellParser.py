@@ -34,11 +34,11 @@ def parse_spell_details(spell_segments):
     try:
         spell['Name'] = spell_segments[0]
         # Ignore first part of string before ':', it is just the label
-        spell['Casting Time'] = spell_segments[2].split(':')[1].strip()
-        spell['Range'] = spell_segments[3].split(':')[1].strip()
-        spell['Components'] = spell_segments[4].split(':')[1].strip()
-        spell['Duration'] = spell_segments[5].split(':')[1].strip()
-        spell['Description'] = spell_segments[6]
+        spell['castingTime'] = spell_segments[2].split(':')[1].strip()
+        spell['range'] = spell_segments[3].split(':')[1].strip()
+        spell['components'] = spell_segments[4].split(':')[1].strip()
+        spell['duration'] = spell_segments[5].split(':')[1].strip()
+        spell['description'] = spell_segments[6]
 
         # Check if the spell has a valid cantrip/level indicator, school, and listed classes
         match = re.search(r"^(?:Level (\d+) (\w+)|(\w+) Cantrip) \((.*?)\)$", spell_segments[1])

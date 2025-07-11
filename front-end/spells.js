@@ -84,6 +84,7 @@ function renderSpells(spells) {
                 <strong>${spell.name}</strong>
                 <em>Level ${spell.level} ${spell.school} (${spell.classes.join(", ")})</em>
                 <em>Casting Time: ${spell.castingTime}</em>
+                <em>Components: ${spell.components}</em>
                 <em>Range: ${spell.range}</em>
                 <em>Duration: ${spell.duration}</em>
             </div>

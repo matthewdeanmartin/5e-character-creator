@@ -17,14 +17,15 @@ var spellbookJSON string
 // Spell defines the structure for a D&D spell.
 // TODO(vmartin): Fix problem where input JSON properties don't match the values fed into the JS
 type Spell struct {
-	Name        string   `json:"Name"`
-	Level       int      `json:"Level"`
-	School      string   `json:"School"`
-	Classes     []string `json:"Classes"`
-	CastingTime string   `json:"Casting Time"`
-	Range       string   `json:"Range"`
-	Duration    string   `json:"Duration"`
-	Description string   `json:"Description"`
+	Name        string   `json:"name"`
+	Level       int      `json:"level"`
+	School      string   `json:"school"`
+	Classes     []string `json:"classes"`
+	CastingTime string   `json:"castingTime"`
+	Range       string   `json:"range"`
+	Components  string   `json:"components"`
+	Duration    string   `json:"duration"`
+	Description string   `json:"description"`
 }
 
 // spellbook will hold all the available spells after parsing the JSON.
