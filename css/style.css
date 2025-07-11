@@ -1,0 +1,290 @@
+/* Basic reset and full-screen setup */
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    background-color: #f0f0f0;
+}
+
+/* The main container that will hold all the boxes */
+.box-container {
+    display: flex; /* Enables Flexbox layout */
+    flex-wrap: wrap; /* Allows items to wrap to the next line */
+    gap: 1rem; /* This creates the buffer/space between all boxes */
+    padding: 1rem; /* Adds padding around the entire container */
+    box-sizing: border-box; /* Ensures padding is included in the total width/height */
+}
+
+/* The base style for each box */
+.box {
+    padding: 1.5rem;
+    border-radius: 8px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    color: #333;
+    
+    /* --- Flexbox Properties --- */
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+/* --- Non-Uniform Sizing for Character Sheet --- */
+/* --- FIRST ROW --- */
+.box-char-info { flex-basis: 94%; flex-grow: 1; background-color: #e0f7fa; }
+/* --- SECOND ROW --- */
+.box-abilities { flex-basis: 36%; flex-grow: 1; max-height: 800px; background-color: #ffecb3; }
+.box-skills { flex-basis: 58%; flex-grow: 2; max-height: 800px; background-color: #c8e6c9; }
+/* --- THIRD ROW --- */
+.box-combat { flex-basis: 47%; flex-grow: 1; background-color: #ffcdd2; }
+.box-attacks-features { flex-basis: 47%; flex-grow: 2; background-color: #d1c4e9; }
+/* --- FOURTH ROW --- */
+.box-spells { flex-basis: 94%; flex-grow: 1; background-color: #e3f2fd; /* Light blue */ }
+/* --- FIFTH ROW --- */
+.box-personality-equipment { flex-basis: 94%; flex-grow: 1; background-color: #f0f4c3; }
+
+/* --- Form Element Styles --- */
+.row-form-element-container {
+    display: flex;
+    flex-flow: row wrap;
+    flex-grow: 0;
+    gap: 0.75rem;
+    text-align: left;
+}
+
+.form-element-container {
+    display: flex;
+    flex-flow: column wrap;
+    flex-grow: 0;
+    gap: 0.75rem;
+    text-align: left;
+}
+
+.grow-form-element-container {
+    display: flex;
+    flex-flow: column wrap;
+    flex-grow: 1;
+    gap: 0.75rem;
+    text-align: left;
+}
+
+.label-style {
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #555;
+    padding: 0.25rem 0;
+}
+.label-style.section-title {
+    font-size: 1.1rem;
+    color: #333;
+    border-bottom: 2px solid #eee;
+    margin-bottom: 0.5rem;
+}
+
+.input-style, 
+select.input-style,
+textarea.input-style {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+    background-color: #fff;
+    color: #333;
+    -webkit-appearance: none; /* Removes default browser styling for select */
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.input-style-dropdown {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+    background-color: #fff;
+    color: #333;
+    -webkit-appearance: none; /* Removes default browser styling for select */
+    -moz-appearance: none;
+    appearance: none;
+    /* Add custom dropdown arrow */
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007CB2%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E');
+    background-repeat: no-repeat;
+    background-position: right .7em top 50%, 0 0;
+    background-size: .65em auto, 100%;
+}
+.input-style:focus {
+    outline: none;
+    border-color: #007bff;
+}
+textarea.input-style {
+    resize: vertical;
+}
+
+.calculated-value-style {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #e9ecef;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #495057;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.ability-label-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.proficiency-checkbox {
+    width: 1rem;
+    height: 1rem;
+}
+
+
+/* --- Skill/Save Entry --- */
+.proficiency-entry {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.25rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+.proficiency-entry:hover {
+    background-color: #f0f0f0;
+}
+.proficiency-entry .label-style {
+    flex-grow: 1;
+    font-size: 0.9rem;
+    font-weight: normal;
+}
+
+/* --- Buttons & Footer --- */
+.btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    background-color: #0000FF;
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.btn:hover {
+    background-color: #0096FF;
+}
+
+.btn-red {
+    background-color: #8B0000;
+    color: white;
+}
+
+.btn-red:hover {
+    background-color: #EE4B2B;
+}
+
+.btn-green {
+    background-color: #008000;
+    color: white;
+}
+
+.btn-green:hover {
+    background-color: #AAFF00;
+}
+
+.sheet-footer {
+    text-align: center;
+    padding: 1rem;
+}
+.sheet-footer .btn .btn-red .btn-green {
+    margin: 0 0.5rem;
+}
+
+/* --- TOOLTIP STYLES --- */
+.tooltip-icon {
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    background-color: #888;
+    color: white;
+    text-align: center;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    margin-left: 0.5rem;
+    cursor: help;
+    font-style: italic;
+}
+
+.tooltip-popup {
+    display: none;
+    position: absolute;
+    background-color: #333;
+    color: white;
+    padding: 0.75rem;
+    border-radius: 6px;
+    max-width: 300px;
+    font-size: 0.9rem;
+    z-index: 100;
+    pointer-events: none; /* Prevents the tooltip from interfering with mouse events */
+}
+
+/* --- SPELLBOOK STYLES --- */
+.spell-filters {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+#spell-list {
+    max-height: 400px;
+    overflow-y: auto;
+    padding-right: 0.5rem;
+    border-top: 2px solid #eee;
+    margin-top: 1rem;
+}
+
+.spell-item {
+    padding: 0.75rem;
+    border-bottom: 1px solid #ddd;
+}
+.spell-item:last-child {
+    border-bottom: none;
+}
+
+.spell-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 0.25rem;
+}
+
+.spell-header strong {
+    font-size: 1.1rem;
+}
+
+.spell-header em {
+    font-size: 0.8rem;
+    color: #555;
+}
+
+.spell-item p {
+    margin: 0 0 0.5rem 0;
+    font-size: 0.9rem;
+}
+
+.spell-item small {
+    font-size: 0.8rem;
+    color: #777;
+}

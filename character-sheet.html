@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D&D 5e Character Sheet (Flexbox)</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- This script is required to run Go Wasm -->
+    <script src="front-end/wasm_exec.js"></script>
+</head>
+<body>
+
+    <div class="box-container">
+        <!-- Character Info Box -->
+        <div class="box box-char-info">
+            <div class="form-element-container">
+                <label class="label-style" for="character-name">Character Name</label>
+                <input type="text" id="character-name" class="input-style" data-save="character-name">
+                
+                <div class="row-form-element-container">
+                    <div>
+                        <label class="label-style" for="class">Class</label>
+                        <!-- This dropdown will be populated in JS -->
+                        <select id="class" class="input-style-dropdown" data-save="class">
+                            <option value="">-- Select Class --</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="label-style" for="level">Level</label>
+                        <input type="number" id="level" class="input-style" data-save="level" value="1">
+                    </div>
+                    <div>
+                        <label class="label-style" for="background">Background</label>
+                        <input type="text" id="background" class="input-style" data-save="background">
+                    </div>
+                    <div>
+                        <label class="label-style" for="player-name">Player Name</label>
+                        <input type="text" id="player-name" class="input-style" data-save="player-name">
+                    </div>
+                    <div>
+                        <label class="label-style" for="race">Race</label>
+                        <!-- This dropdown will be populated in JS -->
+                        <select id="race" class="input-style-dropdown" data-save="race">
+                             <option value="">-- Select Race --</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="label-style" for="alignment">Alignment</label>
+                        <input type="text" id="alignment" class="input-style" data-save="alignment">
+                    </div>
+                    <div>
+                        <label class="label-style" for="experience">Experience</label>
+                        <input type="number" id="experience" class="input-style" data-save="experience">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ability Scores Box -->
+        <div class="box box-abilities">
+            <div id="ability-scores" class="form-element-container">
+                <label class="label-style section-title">Ability Scores</label>
+                <!-- Abilities & saving throws inserted by JS -->
+            </div>
+        </div>
+        
+        <!-- Skills & Saves Box -->
+        <div class="box box-skills">
+            <div class="form-element-container">
+                <label class="label-style">Proficiency Bonus</label>
+                <input type="text" class="input-style" data-save="proficiency-bonus" value="+2">
+            </div>
+            <div id="skills" class="grow-form-element-container">
+                <label class="label-style section-title">Skills</label>
+                <!-- Skills inserted by JS -->
+            </div>
+        </div>
+
+        <!-- Combat Box -->
+        <div class="box box-combat">
+             <div class="form-element-container">
+                <label class="label-style section-title">Combat</label>
+                <div class="row-form-element-container">
+                    <div>
+                        <label class="label-style">Armor Class</label>
+                        <div class="calculated-value-style" data-save="ac">10</div>
+                    </div>
+                    <div>
+                        <label class="label-style">Initiative</label>
+                        <div class="calculated-value-style" data-save="initiative">+0</div>
+                    </div>
+                    <div>
+                        <label class="label-style">Speed</label>
+                        <div class="calculated-value-style" data-save="speed">30</div>
+                    </div>
+                </div>
+                <label class="label-style">Hit Points</label>
+                <input type="number" class="input-style" placeholder="Max HP" data-save="hp-max">
+                <input type="number" class="input-style" placeholder="Current HP" data-save="hp-current">
+                <input type="number" class="input-style" placeholder="Temp HP" data-save="hp-temp">
+            </div>
+        </div>
+
+        <!-- Attacks & Features Box -->
+        <div class="box box-attacks-features">
+            <div id="attacks-spellcasting" class="form-element-container">
+                <label class="label-style section-title">Attacks & Spellcasting</label>
+                <div id="attacks-list"></div>
+                <button id="add-attack" class="btn">Add Attack</button>
+            </div>
+            <div class="grow-form-element-container">
+                <label class="label-style section-title">Features & Traits</label>
+                <textarea class="input-style" rows="8" data-save="features-traits"></textarea>
+            </div>
+        </div>
+
+        <div class="box box-spells">
+            <label class="label-style section-title">Spellbook</label>
+            <div id="wasm-loading">Loading Spellbook...</div>
+            <div id="spell-box" style="display: none;">
+                <div class="spell-filters">
+                    <select id="spell-class-filter" class="input-style"></select>
+                    <select id="spell-school-filter" class="input-style"></select>
+                    <select id="spell-level-filter" class="input-style"></select>
+                </div>
+                <div id="spell-list"></div>
+            </div>
+        </div>
+
+        <!-- Personality & Equipment Box -->
+        <div class="box box-personality-equipment">
+            <div class="grow-form-element-container">
+                <label class="label-style section-title">Personality</label>
+                <textarea class="input-style" placeholder="Personality Traits" data-save="personality"></textarea>
+                <textarea class="input-style" placeholder="Ideals" data-save="ideals"></textarea>
+                <textarea class="input-style" placeholder="Bonds" data-save="bonds"></textarea>
+                <textarea class="input-style" placeholder="Flaws" data-save="flaws"></textarea>
+            </div>
+             <div class="grow-form-element-container">
+                <label class="label-style section-title">Equipment</label>
+                <textarea class="input-style" rows="6" data-save="equipment"></textarea>
+            </div>
+        </div>
+
+    </div>
+    
+    <footer class="sheet-footer">
+        <button id="save-character" class="btn btn-green">Save Character</button>
+        <button id="load-character" class="btn">Load Character</button>
+        <button id="reset-character" class="btn btn-red">Reset Character</button>
+    </footer>
+
+    <script src="front-end/core.js" type="module"></script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+{
+  "name": "character-creator-5e",
+  "version": "1.0.0",
+  "description": "A modular D&D 5e character sheet",
+  "main": "./front-end/core.js",
+  "scripts": {
+    "setup": "npm install",
+    "start": "http-server -c-1"
+  },
+  "keywords": [
+    "dnd",
+    "5e",
+    "character-sheet"
+  ],
+  "author": "Vlad Martin <vladislav.e.martin@gmail.com>",
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}

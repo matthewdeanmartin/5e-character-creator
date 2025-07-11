@@ -1,2 +1,6 @@
-# 5e-character-creator
-Fun project to blend Python, Go, and JS to create a web-based character creator for D&amp;D 5th Edition (based off the SRDv5.2.1, available at https://www.dndbeyond.com/srd)
+# 5th Edition Character Creator Served on HTTP Webpage
+
+## How-To
+
+1. Start the HTTP server on `localhost` by running `npm run start`
+2. Navigate through your browser of choice to: http://192.168.1.18:8080/character-sheet.html
