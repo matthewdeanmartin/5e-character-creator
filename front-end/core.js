@@ -3,8 +3,8 @@ import { initializeCharacterBox } from './character.js';
 import { initializeAbilities, updateAllModifiers } from './abilities.js';
 import { initializeSkills, updateAllSkills } from './skills.js';
 import { initializeCombat, addAttack } from './combat.js';
-import { initializeSpells } from './spells.js';
 import { initializeTooltips } from './tooltips.js';
+import { openSpellbookPopup } from './spells.js';
 
 const DND_SHEET = {
     saveKey: 'currentCharacterSheet',
@@ -16,7 +16,6 @@ const DND_SHEET = {
         initializeSkills();
         initializeCombat();
         initializeTooltips();
-        initializeSpells(); // Initialize the spellbook
         
         // Bind global events
         this.bindGlobalEvents();
@@ -26,6 +25,7 @@ const DND_SHEET = {
     },
 
     bindGlobalEvents() {
+        document.getElementById('open-spellbook-btn').addEventListener('click', () => openSpellbookPopup());
         document.getElementById('save-character').addEventListener('click', () => this.saveCharacter());
         document.getElementById('load-character').addEventListener('click', () => this.loadCharacter());
         document.getElementById('reset-character').addEventListener('click', () => this.resetCharacter());

@@ -39,11 +39,23 @@ html, body {
 .box-combat { flex-basis: 47%; flex-grow: 1; background-color: #ffcdd2; }
 .box-attacks-features { flex-basis: 47%; flex-grow: 2; background-color: #d1c4e9; }
 /* --- FOURTH ROW --- */
-.box-spells { flex-basis: 94%; flex-grow: 1; background-color: #e3f2fd; /* Light blue */ }
+.box-spells { flex-basis: 94%; flex-grow: 1; flex-direction: column; background-color: #e3f2fd; /* Light blue */ }
 /* --- FIFTH ROW --- */
 .box-personality-equipment { flex-basis: 94%; flex-grow: 1; background-color: #f0f4c3; }
 
+/* --- Non-Uniform Sizing for Spellbook Page --- */
+.box-spellbook { flex-basis: 94%; flex-grow: 1; background-color: #e0f7fa; }
+.box-spell-results { flex-basis: 94%; flex-grow: 1; flex-direction: column; background-color: #ffecb3; }
+
 /* --- Form Element Styles --- */
+.row-form-element-container-rigid {
+    display: flex;
+    flex-flow: row nowrap;
+    flex-grow: 0;
+    gap: 0.75rem;
+    text-align: left;
+}
+
 .row-form-element-container {
     display: flex;
     flex-flow: row wrap;
@@ -143,7 +155,7 @@ textarea.input-style {
     gap: 0.5rem;
 }
 
-.proficiency-checkbox {
+.checkbox-style {
     width: 1rem;
     height: 1rem;
 }
@@ -240,13 +252,6 @@ textarea.input-style {
 }
 
 /* --- SPELLBOOK STYLES --- */
-.spell-filters {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 0.5rem;
-    margin-bottom: 1rem;
-}
-
 #spell-list {
     max-height: 400px;
     overflow-y: auto;
@@ -275,16 +280,17 @@ textarea.input-style {
 }
 
 .spell-header em {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.spell-item em {
+    margin: 0 0 0.5rem 0;
+    font-size: 0.9rem;
     color: #555;
 }
 
 .spell-item p {
     margin: 0 0 0.5rem 0;
     font-size: 0.9rem;
-}
-
-.spell-item small {
-    font-size: 0.8rem;
-    color: #777;
 }

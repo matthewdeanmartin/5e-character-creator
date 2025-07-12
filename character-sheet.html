@@ -115,15 +115,13 @@
         </div>
 
         <div class="box box-spells">
-            <label class="label-style section-title">Spellbook</label>
-            <div id="wasm-loading">Loading Spellbook...</div>
-            <div id="spell-box" style="display: none;">
-                <div class="spell-filters">
-                    <select id="spell-class-filter" class="input-style"></select>
-                    <select id="spell-school-filter" class="input-style"></select>
-                    <select id="spell-level-filter" class="input-style"></select>
-                </div>
-                <div id="spell-list"></div>
+            <label class="label-style section-title">Known Spells</label>
+            <div class="row-form-element-container">
+                <label class="label-style">Open the spellbook to browse and select spells. Your choices will appear in the table below</label>
+                <button id="open-spellbook-btn" class="btn">Learn Spells from Spellbook</button>
+            </div>
+            <div class="form-element-container" id="known-spells">
+                <!-- Selected spells will appear here -->
             </div>
         </div>
 

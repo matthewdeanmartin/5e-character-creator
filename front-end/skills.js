@@ -49,7 +49,7 @@ function createProficiencyElement(item) {
     element.dataset.ability = item.ability;
 
     element.innerHTML = `
-        <input type="checkbox" class="proficiency-checkbox" data-save="${item.id}-skill">
+        <input type="checkbox" class="checkbox-style" data-save="${item.id}-skill">
         <label class="label-style" for="${item.id}">${item.name} (${item.ability.slice(0,3)})</label>
         <div class="calculated-value-style bonus">+0</div>
     `;
@@ -68,7 +68,7 @@ export function getProficiencyBonus() {
 }
 
 function updateSkill(skillElement) {
-    const isProficient = skillElement.querySelector('.proficiency-checkbox').checked;
+    const isProficient = skillElement.querySelector('.checkbox-style').checked;
     const abilityId = skillElement.dataset.ability;
     // Find the ability associated with this skill
     const abilityContainer = document.querySelector(`#ability-scores [data-ability="${abilityId}"]`);

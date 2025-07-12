@@ -13,7 +13,7 @@ export function initializeAbilities() {
 function bindAbilityEvents() {
     document.querySelectorAll('#ability-scores .form-element-container').forEach(container => {
         const input = container.querySelector('.ability-score');
-        const checkbox = container.querySelector('.proficiency-checkbox');
+        const checkbox = container.querySelector('.checkbox-style');
         input.addEventListener('input', () => updateAbility(container));
         checkbox.addEventListener('change', () => updateAbility(container));
     });
@@ -38,7 +38,7 @@ function createAbilityElement(abilityItem, savingThrowItem) {
 
     element.innerHTML = `
         <div class="ability-label-container">
-            <input type="checkbox" class="proficiency-checkbox" data-save="${abilityItem.id}-prof">
+            <input type="checkbox" class="checkbox-style" data-save="${abilityItem.id}-prof">
             <label class="label-style" for="${abilityItem.id}">${abilityItem.name}</label>
         </div>
         <input type="number" class="input-style ability-score" value="10">
@@ -68,7 +68,7 @@ export function updateAbility(abilityContainer) {
     modifierElement.textContent = modifier >= 0 ? `+${modifier}` : modifier;
     
     // Check whether the proficiency checkbox is checked
-    const isProficient = abilityContainer.querySelector('.proficiency-checkbox').checked;
+    const isProficient = abilityContainer.querySelector('.checkbox-style').checked;
     // Find the proficiency bonus
     const proficiencyBonus = getProficiencyBonus();
     

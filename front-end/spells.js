@@ -1,95 +1,80 @@
+// Keep a reference to the popup window
+let popupWindow = null;
 
-import { CLASSES, SPELL_SCHOOL_FILTERS, SPELL_LEVEL_FILTERS } from './consts.js';
+const SPELL_SELECT_CACHE_KEY = 'dnd_selected_spells_cache';
 
-// Cache DOM elements for the spell section
-const spellBox = document.getElementById('spell-box');
-const classFilter = document.getElementById('spell-class-filter');
-const schoolFilter = document.getElementById('spell-school-filter');
-const levelFilter = document.getElementById('spell-level-filter');
-const spellList = document.getElementById('spell-list');
-const loadingIndicator = document.getElementById('wasm-loading');
+// Function to open the popup
+export function openSpellbookPopup() {
+    // Open the new window and store its reference
+    popupWindow = window.open('./front-end/spellbook/spellbook.html', 'Spellbook Selector', `width="75%",height="75%"`);
 
-export async function initializeSpells() {
-    if (!WebAssembly) {
-        console.error("WebAssembly is not supported in this browser.");
-        loadingIndicator.textContent = "WebAssembly not supported!";
-        return;
-    }
+    // Start an interval to check if the popup has been closed
+    const interval = setInterval(() => {
+        // The 'closed' property will be true when the window is closed
+        if (popupWindow.closed) {
+            // Stop checking
+            clearInterval(interval);
 
-    // Load the WebAssembly module
-    const go = new Go();
-    try {
-        const result = await WebAssembly.instantiateStreaming(fetch("../back-end/main.wasm"), go.importObject);
-        go.run(result.instance);
-        loadingIndicator.style.display = 'none'; // Hide loading indicator
-        spellBox.style.display = 'block'; // Show spell filters
-    } catch (error) {
-        console.error("Error loading Wasm module:", error);
-        loadingIndicator.textContent = "Failed to load spellbook.";
-        return;
-    }
-    
-    // Populate filter dropdowns
-    populateFilters();
-    
-    // Add event listeners to filters
-    classFilter.addEventListener('change', updateSpellList);
-    schoolFilter.addEventListener('change', updateSpellList);
-    levelFilter.addEventListener('change', updateSpellList);
+            // Retrieve the data the popup saved in localStorage
+            const spellsJson = localStorage.getItem(SPELL_SELECT_CACHE_KEY);
 
-    // Initial population of the spell list
-    updateSpellList();
-}
+            
+            if (spellsJson) {
+                const spells = JSON.parse(spellsJson);
 
-function populateFilters() {
-    CLASSES.forEach(classValue => {
-        classFilter.add(new Option(classValue, classValue));
-    });
-    classFilter.add(new Option("All Classes", "All"), 0);
-    classFilter.value = "All";
+                console.log('Spellbook popup was closed, loading data into known spells container.');
+                
+                // Now, add elements to the main page based on the data
+                const knownSpellsContainer = document.getElementById('known-spells');
+                
+                if (!spells || spells.length === 0) {
+                    knownSpellsContainer.innerHTML = '<label class="label-style">No learned spells.</p>';
+                    return;
+                }
 
-    SPELL_SCHOOL_FILTERS.forEach(schoolOption => schoolFilter.add(
-        new Option(schoolOption === "All" ? "All Schools" : `${schoolOption} School`, schoolOption))
-    );
-    SPELL_LEVEL_FILTERS.forEach(levelOption => levelFilter.add(
-        new Option(levelOption === "All" ? "All Levels" : `Level ${levelOption}`, levelOption))
-    );
-}
+                spells.forEach(spell => {
+                    const spellCard = document.createElement('div');
+                    spellCard.className = 'spell-item';
 
-function updateSpellList() {
-    const selectedClass = classFilter.value;
-    const selectedSchool = schoolFilter.value;
-    const selectedLevel = levelFilter.value === "All" ? -1 : parseInt(levelFilter.value);
+                    let componentsHtml = "";
+                    if (spell.components && spell.components.length > 0) {
+                        componentsHtml = `<strong>Components:</strong><em> ${spell.components.join(", ")}</em>`;
+                        if (spell.materials) {
+                            componentsHtml = `<strong>Components:</strong><em> ${spell.components.join(", ")} (${spell.materials})</em>`;
+                        }
+                    }
+                    let durationHtml = "";
+                    if (spell.duration) {
+                        durationHtml = `<strong>Duration:</strong><em>  ${spell.duration}</em>`;
+                    }
+                    let descriptionAddonHtml = "";
+                    if (spell.level > 0 && spell.higher_level && spell.higher_level.length > 0) {
+                        descriptionAddonHtml = `<strong>Cantrip Upgrade:</strong><em> ${spell.higher_level.join("\n")}</em>`;
+                    }
+                    else {
+                        descriptionAddonHtml = `<strong>Higher Level:</strong><em> ${spell.desc.at(-1)}</em>`;
+                    }
 
-    // Call the Go function exported to the global scope
-    const spellsJson = filterSpells(selectedClass, selectedSchool, selectedLevel);
-    const spells = JSON.parse(spellsJson);
+                    spellCard.innerHTML = `
+                        <div class="spell-header">
+                            <strong>${spell.name}</strong>
+                            <em>Level ${spell.level} ${spell.school.name} (${spell.classes.map(dndClass => dndClass.name).join(", ")})<em>
+                        </div>
+                        <strong>Casting Time:</strong><em> ${spell.casting_time}</em>
+                        ${componentsHtml}
+                        ${durationHtml}
+                        <p>${spell.level === 0 ? spell.desc.slice(0, -1).join("\n") : spell.desc.join("\n")}</p>
+                        ${descriptionAddonHtml}
+                    `;
 
-    renderSpells(spells);
-}
+                    knownSpellsContainer.appendChild(spellCard);
+                });
 
-function renderSpells(spells) {
-    spellList.innerHTML = ''; // Clear the list
-
-    if (spells.length === 0) {
-        spellList.innerHTML = '<div class="spell-item">No spells match the current filters.</div>';
-        return;
-    }
-
-    spells.forEach(spell => {
-        const spellItem = document.createElement('div');
-        spellItem.className = 'spell-item';
-        spellItem.innerHTML = `
-            <div class="spell-header">
-                <strong>${spell.name}</strong>
-                <em>Level ${spell.level} ${spell.school} (${spell.classes.join(", ")})</em>
-                <em>Casting Time: ${spell.castingTime}</em>
-                <em>Components: ${spell.components}</em>
-                <em>Range: ${spell.range}</em>
-                <em>Duration: ${spell.duration}</em>
-            </div>
-            <p>${spell.description}</p>
-        `;
-        spellList.appendChild(spellItem);
-    });
+                // Clean up by removing the item from localStorage
+                localStorage.removeItem(SPELL_SELECT_CACHE_KEY);
+            } else {
+                console.log('Spellbook popup was closed without any spells being selected.');
+            }
+        }
+    }, 250); // Check every quarter of a second
 }
