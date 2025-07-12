@@ -1,22 +1,3 @@
-export const CLASSES = [
-    "Artificer", "Barbarian", "Bard", "Cleric", "Druid", "Fighter", 
-    "Monk", "Paladin", "Ranger", "Rogue", "Sorcerer", "Warlock", "Wizard"
-], RACES = [
-    "Aarakocra", "Aasimar", "Bugbear", "Centaur", "Changeling", "Dragonborn",
-    "Dwarf", "Elf", "Fairy", "Firbolg", "Genasi (Air)", "Genasi (Earth)",
-    "Genasi (Fire)", "Genasi (Water)", "Gith", "Gnome", "Goblin", "Goliath",
-    "Halfling", "Harengon", "Hobgoblin", "Human", "Kenku", "Kobold",
-    "Lizardfolk", "Loxodon", "Minotaur", "Orc", "Satyr", "Shifter",
-    "Simic Hybrid", "Tabaxi", "Tiefling", "Tortle", "Triton", "Vedalken",
-    "Warforged", "Yuan-ti"
-];
-
-// FILTER CRITERIA FOR SPELLS
-// Spell school filters
-export const SPELL_SCHOOL_FILTERS = ["All", "Abjuration", "Conjuration", "Divination", "Enchantment", "Evocation", "Illusion", "Necromancy", "Transmutation"],
-    // Spell level filters
-    SPELL_LEVEL_FILTERS = ["All", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
-
 // See Proficiency Bonus table from Page 8 of the SRD 5.2.1
 // Source: https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf
 export const PROFICIENCY_BONUSES = [

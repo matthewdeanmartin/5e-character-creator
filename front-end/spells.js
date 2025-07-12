@@ -1,3 +1,5 @@
+import { buildSpellInfoHtml } from "./spell-selector/spells_render.js";
+
 // Keep a reference to the popup window
 let popupWindow = null;
 
@@ -6,7 +8,7 @@ const SPELL_SELECT_CACHE_KEY = 'dnd_selected_spells_cache';
 // Function to open the popup
 export function openSpellbookPopup() {
     // Open the new window and store its reference
-    popupWindow = window.open('./front-end/spellbook/spellbook.html', 'Spellbook Selector', `width="75%",height="75%"`);
+    popupWindow = window.open('./front-end/spell-selector/spell_selector.html', 'Spellbook Selector', `width="75%",height="75%"`);
 
     // Start an interval to check if the popup has been closed
     const interval = setInterval(() => {
@@ -35,37 +37,9 @@ export function openSpellbookPopup() {
                 spells.forEach(spell => {
                     const spellCard = document.createElement('div');
                     spellCard.className = 'spell-item';
-
-                    let componentsHtml = "";
-                    if (spell.components && spell.components.length > 0) {
-                        componentsHtml = `<strong>Components:</strong><em> ${spell.components.join(", ")}</em>`;
-                        if (spell.materials) {
-                            componentsHtml = `<strong>Components:</strong><em> ${spell.components.join(", ")} (${spell.materials})</em>`;
-                        }
-                    }
-                    let durationHtml = "";
-                    if (spell.duration) {
-                        durationHtml = `<strong>Duration:</strong><em>  ${spell.duration}</em>`;
-                    }
-                    let descriptionAddonHtml = "";
-                    if (spell.level > 0 && spell.higher_level && spell.higher_level.length > 0) {
-                        descriptionAddonHtml = `<strong>Cantrip Upgrade:</strong><em> ${spell.higher_level.join("\n")}</em>`;
-                    }
-                    else {
-                        descriptionAddonHtml = `<strong>Higher Level:</strong><em> ${spell.desc.at(-1)}</em>`;
-                    }
-
-                    spellCard.innerHTML = `
-                        <div class="spell-header">
-                            <strong>${spell.name}</strong>
-                            <em>Level ${spell.level} ${spell.school.name} (${spell.classes.map(dndClass => dndClass.name).join(", ")})<em>
-                        </div>
-                        <strong>Casting Time:</strong><em> ${spell.casting_time}</em>
-                        ${componentsHtml}
-                        ${durationHtml}
-                        <p>${spell.level === 0 ? spell.desc.slice(0, -1).join("\n") : spell.desc.join("\n")}</p>
-                        ${descriptionAddonHtml}
-                    `;
+                    
+                    // Construct the spell-card based on known info about this spell
+                    spellCard.innerHTML = buildSpellInfoHtml(spell);
 
                     knownSpellsContainer.appendChild(spellCard);
                 });

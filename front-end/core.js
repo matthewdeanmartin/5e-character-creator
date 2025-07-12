@@ -9,9 +9,9 @@ import { openSpellbookPopup } from './spells.js';
 const DND_SHEET = {
     saveKey: 'currentCharacterSheet',
 
-    init() {
+    async init() {
         // Initialize all the modules
-        initializeCharacterBox();
+        await initializeCharacterBox();
         initializeAbilities();
         initializeSkills();
         initializeCombat();
@@ -26,13 +26,14 @@ const DND_SHEET = {
 
     bindGlobalEvents() {
         document.getElementById('open-spellbook-btn').addEventListener('click', () => openSpellbookPopup());
-        document.getElementById('save-character').addEventListener('click', () => this.saveCharacter());
-        document.getElementById('load-character').addEventListener('click', () => this.loadCharacter());
-        document.getElementById('reset-character').addEventListener('click', () => this.resetCharacter());
+        document.getElementById('save-char-button').addEventListener('click', () => this.saveCharacter());
+        document.getElementById('load-char-button').addEventListener('click', () => this.loadCharacter());
+        document.getElementById('reset-char-button').addEventListener('click', () => this.resetCharacter());
     },
 
     saveCharacter() {
         const data = { attacks: [], skills: {}, abilities: {} };
+        // TODO(vmartin): Clean this up, maybe re-introduce data-save property into HTML elements
         document.querySelectorAll('[data-save]').forEach(element => {
             const key = element.dataset.save;
             if (element.type === 'checkbox') {
@@ -107,4 +108,4 @@ const DND_SHEET = {
     }
 };
 
-document.addEventListener('DOMContentLoaded', () => DND_SHEET.init());
+document.addEventListener('DOMContentLoaded', async () => await DND_SHEET.init());

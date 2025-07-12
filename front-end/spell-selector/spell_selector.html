@@ -12,8 +12,8 @@
         <div class="box box-spellbook">
             <div class="row-form-element-container">
                 <div>
-                    <label for="school-filter" class="label-style">School of Magic</label>
-                    <select id="school-filter" class="input-style">
+                    <label for="school-dropdown" class="label-style section-title">School of Magic</label>
+                    <select id="school-dropdown" class="input-style-dropdown">
                         <option value="">All Schools</option>
                         <option value="Abjuration">Abjuration</option>
                         <option value="Conjuration">Conjuration</option>
@@ -26,8 +26,8 @@
                     </select>
                 </div>
                 <div>
-                    <label for="start-level-filter" class="label-style">Min Level</label>
-                    <select id="start-level-filter" class="input-style">
+                    <label for="min-level-dropdown" class="label-style section-title">Min Level</label>
+                    <select id="min-level-dropdown" class="input-style-dropdown">
                         <option value="">All</option>
                         <option value="0">0 (Cantrip)</option>
                         <option value="1">1</option>
@@ -42,8 +42,8 @@
                     </select>
                 </div>
                 <div>
-                    <label for="end-level-filter" class="label-style">Max Level</label>
-                    <select id="end-level-filter" class="input-style">
+                    <label for="max-level-dropdown" class="label-style section-title">Max Level</label>
+                    <select id="max-level-dropdown" class="input-style-dropdown">
                         <option value="">All</option>
                         <option value="0">0 (Cantrip)</option>
                         <option value="1">1</option>
@@ -60,7 +60,6 @@
             </div>
             <div class = "row-form-element-container">
                 <button id="fetch-spells-btn" class="btn">Fetch Spells</button>
-                <button id="clear-cache-btn" class="btn btn-red">Clear Local Cache</button>
                 <button id="done-btn" class="btn btn-green">Done Selecting Spells</button>
             </div>
         </div>
@@ -72,6 +71,6 @@
             <!-- Spell results will be rendered here -->
         </div>
     </div>
-    <script src="spellbook.js" type="module"></script>
+    <script src="spell_selector.js" type="module"></script>
 </body>
 </html>
