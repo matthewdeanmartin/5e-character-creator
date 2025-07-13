@@ -1,6 +1,6 @@
 import { BASE_SRD_API_URL, SRD_API_CLASSES_URL, SRD_API_SPELLS_URL } from "./consts.js";
 
-export function buildSrdApiUrl_spells(levels=[], schools=[]) {
+export function buildSrdApiUrl_spells(schools=[], levels=[]) {
     const queryParams = [];
 
     // Check if a 'levels' filter is provided and is a non-empty array.

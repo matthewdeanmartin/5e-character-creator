@@ -1,13 +1,13 @@
 // js/main.js
-import { fetchSpellsByFilter } from './spells_api.js';
+import { fetchSpellsByFilter } from '../srd-api/fetch_spells.js';
 import { renderSpells, updateStatus } from './spells_render.js';
 
 const SPELL_SELECT_CACHE_KEY = 'dnd_selected_spells_cache';
 
 // --- DOM Elements ---
-const schoolDropdown = document.getElementById('school-filter');
-const minLevelDropdown = document.getElementById('start-level-filter');
-const maxLevelDropdown = document.getElementById('end-level-filter');
+const schoolDropdown = document.getElementById('school-dropdown');
+const minLevelDropdown = document.getElementById('min-level-dropdown');
+const maxLevelDropdown = document.getElementById('max-level-dropdown');
 const fetchBtn = document.getElementById('fetch-spells-btn');
 const doneSelectingBtn = document.getElementById('done-btn');
 

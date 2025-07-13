@@ -1,9 +1,11 @@
 // js/script.js
 import { initializeCharacterBox } from './character.js';
-import { initializeAbilities, updateAllModifiers } from './abilities.js';
+import { initializeAbilities, updateAllAbilities } from './abilities.js';
 import { initializeSkills, updateAllSkills } from './skills.js';
-import { initializeCombat, addAttack } from './combat.js';
-import { initializeTooltips } from './tooltips.js';
+// TODO(vmartin): Reincorporate combat section 
+// import { initializeCombat, addAttack } from './combat.js';
+// TODO(vmartin): Reincorporate tooltips 
+// import { initializeTooltips } from './tooltips.js';
 import { openSpellbookPopup } from './spells.js';
 
 const DND_SHEET = {
@@ -12,10 +14,8 @@ const DND_SHEET = {
     async init() {
         // Initialize all the modules
         await initializeCharacterBox();
-        initializeAbilities();
-        initializeSkills();
-        initializeCombat();
-        initializeTooltips();
+        await initializeAbilities();
+        await initializeSkills();
         
         // Bind global events
         this.bindGlobalEvents();
@@ -28,7 +28,7 @@ const DND_SHEET = {
         document.getElementById('open-spellbook-btn').addEventListener('click', () => openSpellbookPopup());
         document.getElementById('save-char-button').addEventListener('click', () => this.saveCharacter());
         document.getElementById('load-char-button').addEventListener('click', () => this.loadCharacter());
-        document.getElementById('reset-char-button').addEventListener('click', () => this.resetCharacter());
+        document.getElementById('clear-char-button').addEventListener('click', () => this.clearCharacter());
     },
 
     saveCharacter() {
@@ -45,7 +45,7 @@ const DND_SHEET = {
         document.querySelectorAll('#ability-scores .form-element-container').forEach(c => { 
             data.abilities[c.dataset.ability] = c.querySelector('.ability-score').value; 
         });
-        document.querySelectorAll('#skills .proficiency-entry').forEach(element => { 
+        document.querySelectorAll('#skills .entry-with-proficiency').forEach(element => { 
             data.skills[element.dataset.name] = element.classList.contains('proficient'); 
         });
         document.querySelectorAll('#attacks-list .details-grid').forEach(element => {
@@ -94,13 +94,13 @@ const DND_SHEET = {
         if (data.attacks) { data.attacks.forEach(attackData => addAttack(attackData)); }
         
         // Update all calculated values after loading
-        updateAllModifiers();
+        updateAllAbilities();
         updateAllSkills();
         
         alert('Character Loaded!');
     },
 
-    resetCharacter() {
+    clearCharacter() {
         if (confirm('Are you sure? This will erase the saved character.')) {
             localStorage.removeItem(this.saveKey);
             window.location.reload();

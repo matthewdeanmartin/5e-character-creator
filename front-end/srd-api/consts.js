@@ -1,4 +1,10 @@
 export const BASE_SRD_API_URL = 'https://www.dnd5eapi.co',
     SRD_API_SPELLS_URL = '/api/2014/spells',
     SRD_API_CLASSES_URL = '/api/2014/classes',
-    SRD_API_RACES_URL = '/api/2014/races';
+    SRD_API_RACES_URL = '/api/2014/races',
+    SRD_API_ABILITIES_URL = '/api/2014/ability-scores',
+    SRD_API_SKILLS_URL = '/api/2014/skills',
+    SRD_API_ALIGNMENTS_URL = '/api/2014/alignments',
+    SRD_API_BACKGROUNDS_URL = '/api/2014/backgrounds',
+    SRD_API_SUBCLASSES_URL = '/api/2014/subclasses',
+    SRD_API_SUBRACES_URL = '/api/2014/subraces';

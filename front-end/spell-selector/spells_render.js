@@ -11,7 +11,7 @@ export function buildSpellInfoHtml(spell) {
     }
     let durationHtml = "";
     if (spell.duration) {
-        durationHtml = `<strong>Duration:</strong><em>  ${spell.duration}</em>`;
+        durationHtml = `<strong>Duration:</strong><em> ${spell.duration}</em>`;
     }
     let descriptionHtml = "";
     let descriptionAddonHtml = "";

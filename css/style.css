@@ -36,8 +36,8 @@ html, body {
 .box-abilities { flex-basis: 36%; flex-grow: 1; max-height: 800px; background-color: #ffecb3; }
 .box-skills { flex-basis: 58%; flex-grow: 2; max-height: 800px; background-color: #c8e6c9; }
 /* --- THIRD ROW --- */
-.box-combat { flex-basis: 47%; flex-grow: 1; background-color: #ffcdd2; }
-.box-attacks-features { flex-basis: 47%; flex-grow: 2; background-color: #d1c4e9; }
+.box-combat { flex-basis: 94%; flex-grow: 1; background-color: #ffcdd2; }
+/*.box-attacks-features { flex-basis: 47%; flex-grow: 2; background-color: #d1c4e9; }*/
 /* --- FOURTH ROW --- */
 .box-spells { flex-basis: 94%; flex-grow: 1; flex-direction: column; background-color: #e3f2fd; /* Light blue */ }
 /* --- FIFTH ROW --- */
@@ -48,18 +48,57 @@ html, body {
 .box-spell-results { flex-basis: 94%; flex-grow: 1; flex-direction: column; background-color: #ffecb3; }
 
 /* --- Form Element Styles --- */
-.row-form-element-container-rigid {
-    display: flex;
-    flex-flow: row nowrap;
+
+/* * The main container for the proficiency bonus bubble.
+* It's designed to be compact, visually distinct, and have a "bubble" or "pill" shape.
+*/
+.proficiency-bubble {
+    display: inline-flex; /* Aligns children (label and value) in a row */
     flex-grow: 0;
-    gap: 0.75rem;
-    text-align: left;
+    width: 300px;
+    align-items: center; /* Vertically centers the children */
+    background: linear-gradient(140deg, #89f7fe 0%, #66a6ff 100%); /* A cool, vibrant blue gradient */
+    color: #1c3d5a; /* A dark, desaturated blue for readable text */
+    border-radius: 50px; /* Creates the pill/bubble shape */
+    padding: 6px 8px 6px 18px; /* Top, Right, Bottom, Left padding for spacing */
+    box-shadow: 0 4px 10px #007bff, 0 1px 3px #0046b3; /* Soft shadow for a "lifted" effect */
+    border: 1px solid rgba(255, 255, 255, 0.4); /* Subtle inner border for a glossy look */
+    transition: transform 0.2s ease-out, box-shadow 0.2s ease-out; /* Smooth transition for hover effects */
+    cursor: default; /* Changes cursor to show it's not a standard button */
 }
+
+/* A subtle hover effect to make the element feel more interactive */
+.proficiency-bubble:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px #007bff, 0 2px 4px #0046b3;
+}
+
+.proficiency-bubble .label-style {
+    font-weight: 600; /* Semi-bold for clarity */
+    font-size: 1rem;   /* Standard font size (16px) */
+    margin-right: 12px; /* Creates space between the label and the value circle */
+    letter-spacing: 0.5px; /* Adds a bit of breathing room between letters */
+}
+
+.proficiency-bubble .calculated-value-style {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff; /* A solid white background for high contrast */
+    color: #0056b3; /* A strong, dark blue for the number */
+    font-weight: 700; /* Bold font weight for the value */
+    font-size: 1.1rem; /* Slightly larger font size to emphasize the number */
+    border-radius: 50%; /* Makes the element a perfect circle */
+    width: 42px;  /* Ensures a consistent circular shape */
+    height: 42px;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1); /* Inner shadow for a bit of depth */
+}
+
 
 .row-form-element-container {
     display: flex;
     flex-flow: row wrap;
-    flex-grow: 0;
+    flex-grow: 1;
     gap: 0.75rem;
     text-align: left;
 }
@@ -67,7 +106,7 @@ html, body {
 .form-element-container {
     display: flex;
     flex-flow: column wrap;
-    flex-grow: 0;
+    flex-grow: 1;
     gap: 0.75rem;
     text-align: left;
 }
@@ -141,21 +180,16 @@ textarea.input-style {
     text-align: center;
 }
 
-.ability-label-container {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
 .checkbox-style {
     width: 1rem;
     height: 1rem;
 }
 
 
-/* --- Skill/Save Entry --- */
-.proficiency-entry {
+/* --- Entry with Proficiency Styles --- */
+.entry-with-proficiency {
     display: flex;
+    flex-flow: row nowrap;
     align-items: center;
     gap: 0.5rem;
     padding: 0.25rem;
@@ -163,10 +197,10 @@ textarea.input-style {
     cursor: pointer;
     transition: background-color 0.2s;
 }
-.proficiency-entry:hover {
+.entry-with-proficiency:hover {
     background-color: #f0f0f0;
 }
-.proficiency-entry .label-style {
+.entry-with-proficiency .label-style {
     flex-grow: 1;
     font-size: 0.9rem;
     font-weight: normal;

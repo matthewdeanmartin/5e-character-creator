@@ -16,45 +16,53 @@
         <!-- Box #1: Top-level character info box -->
         <div class="box box-char-info" id="char-info-box">
             <!-- Organize character info in a column, with character name on top -->
-            <div class="form-element-container" id="char-info-row-box">
-                <label class="label-style section-title" for="character-name" id="char-name-title">Character Name</label>
-                <input type="text" id="char-name-text" class="input-style">
+            <div class="form-element-container" id="char-info-title-box">
+                <div class="row-form-element-container">
+                    <!-- Character's name -->
+                    <label class="label-style section-title" for="character-name" id="char-name-title">Character Name</label>
+                    <input type="text" id="char-name-text" class="input-style">
+                    <!-- Player's name -->
+                    <label class="label-style" for="player-name" id="player-name-label">Player Name</label>
+                    <input type="text" id="player-name-text" class="input-style">
+                </div>
                 <!-- Organize other character info in a row, below character name -->
                 <div class="row-form-element-container">
-                    <div class=>
-                        <label class="label-style" for="class" id="class-label">Class</label>
+                    <div class="form-element-container">
+                        <label class="label-style" for="class-dropdown" id="class-label">Class</label>
                         <select id="class-dropdown" class="input-style-dropdown">
                             <!--These classes will be populated in JS-->
                             <option value="">-- Select Class --</option>
                         </select>
                     </div>
-                    <div>
-                        <label class="label-style" for="level" id="level-label">Level</label>
+                    <div class="form-element-container">
+                        <label class="label-style" for="level-dropdown" id="level-label">Level</label>
                         <select id="level-dropdown" class="input-style-dropdown">
                             <option value="">-- Select Level --</option>
                             <!--These levels will be populated in JS-->
                         </select>
                     </div>
-                    <div>
-                        <label class="label-style" for="background" id="background-label">Background</label>
-                        <input type="text" id="background" class="input-style">
+                    <div class="form-element-container">
+                        <label class="label-style" for="background-dropdown" id="background-label">Background</label>
+                        <select id="background-dropdown" class="input-style-dropdown">
+                            <option value="">-- Select Background --</option>
+                            <!--These races will be populated in JS-->
+                        </select>
                     </div>
-                    <div>
-                        <label class="label-style" for="player-name" id="player-name-label">Player Name</label>
-                        <input type="text" id="player-name-text" class="input-style">
-                    </div>
-                    <div>
-                        <label class="label-style" for="race" id="race-label">Race</label>
+                    <div class="form-element-container">
+                        <label class="label-style" for="race-dropdown" id="race-label">Race</label>
                         <select id="race-dropdown" class="input-style-dropdown">
                             <option value="">-- Select Race --</option>
                             <!--These races will be populated in JS-->
                         </select>
                     </div>
-                    <div>
-                        <label class="label-style" for="alignment" id="alignment-label">Alignment</label>
-                        <input type="text" id="alignment-text" class="input-style">
+                    <div class="form-element-container">
+                        <label class="label-style" for="alignment-dropdown" id="alignment-label">Alignment</label>
+                        <select id="alignment-dropdown" class="input-style-dropdown">
+                            <option value="">-- Select Alignment --</option>
+                            <!--These alignments will be populated in JS--> 
+                        </select>
                     </div>
-                    <div>
+                    <div class="form-element-container">
                         <label class="label-style" for="experience" id="experience-label">Experience</label>
                         <input type="number" id="experience-number" class="input-style">
                     </div>
@@ -65,7 +73,7 @@
         <!-- Box #2: Ability scores & saving throws box -->
         <div class="box box-abilities" id="ability-score-box">
             <!-- Organize ability scores & saving throws in a column -->
-            <div class="form-element-container" id="ability-score-box-row">
+            <div class="form-element-container" id="abilities-title-box">
                 <label class="label-style section-title" id="ability-score-title">Ability Scores</label>
                 <!-- Abilities, saving throws, and descriptive tooltips will be populated by JS -->
             </div>
@@ -77,7 +85,7 @@
             <div id="skills-title-box" class="form-element-container">
                 <label class="label-style section-title" id="skills-title">Skills</label>
                 <!-- Organize the proficiency bonus info in a row, below the section title but above the skills themselves -->
-                <div id="prof-bonus-box" class="row-form-element-container">
+                <div id="prof-bonus-box" class="proficiency-bubble">
                     <label class="label-style" id="prof-bonus-label">Proficiency Bonus</label>
                     <div class="calculated-value-style" id="prof-bonus-output">+2</div>
                 </div>
@@ -115,21 +123,6 @@
         </div>
 
         <!-- Box #5: Martial attacks & character features box -->
-        <div class="box box-attacks-features">
-            <!-- Arrange attacks info in a column -->
-            <div id="martial-attacks-title" class="form-element-container">
-                <label class="label-style section-title" id="attacks-title">Attacks</label>
-                <div id="attacks-list">
-                    <!-- Martial attacks will be populated in JS when "Add Attack" is pressed -->
-                </div>
-                <button id="add-attack-button" class="btn">Add Attack</button>
-            </div>
-            <!-- Arrange features title above the content -->
-            <div class="form-element-container">
-                <label class="label-style section-title" id="features-label">Features & Traits</label>
-                <textarea class="input-style" rows="10" cols="40" placeholder="Type here..." id="features-free-text"></textarea>
-            </div>
-        </div>
 
         <!-- Box #6: Spellbook box -->
         <div class="box box-spells">
