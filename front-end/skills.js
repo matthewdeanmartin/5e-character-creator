@@ -7,7 +7,7 @@ import { BASE_SRD_API_URL, SRD_API_SKILLS_URL } from './srd-api/consts.js';
 
 import { batchFetchDetailsFromApi, fetchIndicesFromUrl } from './srd-api/fetch_from_url.js'
 
-const skillsContainer = document.getElementById('skills-title-box');
+const skillsContainer = document.getElementById('skills-table');
 const profBonusOutput = document.getElementById('prof-bonus-output');
 
 export async function initializeSkills() {
@@ -16,13 +16,11 @@ export async function initializeSkills() {
 }
 
 function bindSkillEvents() {
-    skillsContainer.querySelectorAll('.entry-with-proficiency').forEach(entryWithProficiency => {
-        // Should only be one ability score per entry
-        const skillModifierOutput = entryWithProficiency.querySelector('.ability-modifier');
-        // Should only be one proficiency checkmark per entry
-        const skillModifierProfCheckbox = entryWithProficiency.querySelector('.checkbox-style');
-        skillModifierOutput.addEventListener('input', () => updateSkill(entryWithProficiency));
-        skillModifierProfCheckbox.addEventListener('change', () => updateSkill(entryWithProficiency));
+    skillsContainer.querySelectorAll('.table-row').forEach(skillElement => {
+        const modOutput = document.getElementById(`${skillElement.id}-modifier`);
+        const profCheckbox = document.getElementById(`${skillElement.id}-prof`);
+        modOutput.addEventListener('input', () => updateSkill(skillElement));
+        profCheckbox.addEventListener('change', () => updateSkill(skillElement));
     });
 }
 
@@ -60,15 +58,15 @@ async function renderSkills() {
 
 function createSkillElement(skillDetails) {
     const element = document.createElement('div');
-    element.className = 'entry-with-proficiency';
+    element.className = 'table-row';
     element.id = `${skillDetails.index}`;
 
     // The abilities themselves use the raw index as their ID
     // The saving throws tied to each ability use "{ndex}-save" as their ID
     element.innerHTML = `
-        <input type="checkbox" class="checkbox-style" id="${skillDetails.index}-prof">
-        <label class="label-style" for="${skillDetails.index}">${skillDetails.name} (${skillDetails.ability_score.name})</label>
-        <div class="calculated-value-style ability-modifier" id="${skillDetails.index}-modifier">+0</div>
+        <input type="checkbox" class="checkbox-cell" id="${skillDetails.index}-prof">
+        <label class="label-cell" for="${skillDetails.index}">${skillDetails.name} (${skillDetails.ability_score.name})</label>
+        <div class="output-value-cell" id="${skillDetails.index}-modifier">+0</div>
     `;
     
     element.addEventListener('click', () => {
@@ -92,7 +90,7 @@ function updateSkill(skillElement) {
     // Find the skill index
     const skillDetails = skillsDetails.find(details => details.index === skillElement.id);
 
-    const isProficient = skillElement.querySelector('.checkbox-style').checked;
+    const isProficient = document.getElementById(`${skillElement.id}-prof`).checked;
     // Find the ability modifier associated with this skill
     const abilityModifierOutput = document.getElementById(`${skillDetails.ability_score.index}-modifier`);
     const abilityModifier = parseInt(abilityModifierOutput.textContent);
@@ -109,5 +107,5 @@ function updateSkill(skillElement) {
 }
 
 export function updateAllSkills() {
-    skillsContainer.querySelectorAll('.entry-with-proficiency').forEach(element => updateSkill(element));
+    skillsContainer.querySelectorAll('.table-row').forEach(element => updateSkill(element));
 }

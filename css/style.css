@@ -2,7 +2,9 @@
 html, body {
     margin: 0;
     padding: 0;
-    font-family: sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+    line-height: 1.6;
     background-color: #f0f0f0;
 }
 
@@ -15,43 +17,205 @@ html, body {
     box-sizing: border-box; /* Ensures padding is included in the total width/height */
 }
 
-/* The base style for each box */
-.box {
-    padding: 1.5rem;
-    border-radius: 8px;
-    background-color: #ffffff;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    color: #333;
-    
-    /* --- Flexbox Properties --- */
+/* * Base style for the flexible container div.
+* This style is shared by both the row and column variants.
+*/
+.content-section {
     display: flex;
-    flex-direction: row;
-    gap: 1rem;
+    flex-basis: 90%;
+    padding: 20px;
+    max-height: 800px;
+    border-radius: 12px; /* Rounded edges */
+    background-color: #e6f7ff; /* A very light cyan for clean, modern vibe */
+    border: 1px solid #333444;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.07); /* Soft shadow to lift it off the page */
+    gap: 15px; /* Creates space between the items inside */
 }
 
-/* --- Non-Uniform Sizing for Character Sheet --- */
-/* --- FIRST ROW --- */
-.box-char-info { flex-basis: 94%; flex-grow: 1; background-color: #e0f7fa; }
-/* --- SECOND ROW --- */
-.box-abilities { flex-basis: 36%; flex-grow: 1; max-height: 800px; background-color: #ffecb3; }
-.box-skills { flex-basis: 58%; flex-grow: 2; max-height: 800px; background-color: #c8e6c9; }
-/* --- THIRD ROW --- */
-.box-combat { flex-basis: 94%; flex-grow: 1; background-color: #ffcdd2; }
-/*.box-attacks-features { flex-basis: 47%; flex-grow: 2; background-color: #d1c4e9; }*/
-/* --- FOURTH ROW --- */
-.box-spells { flex-basis: 94%; flex-grow: 1; flex-direction: column; background-color: #e3f2fd; /* Light blue */ }
-/* --- FIFTH ROW --- */
-.box-personality-equipment { flex-basis: 94%; flex-grow: 1; background-color: #f0f4c3; }
-
-/* --- Non-Uniform Sizing for Spellbook Page --- */
-.box-spellbook { flex-basis: 94%; flex-grow: 1; background-color: #e0f7fa; }
-.box-spell-results { flex-basis: 94%; flex-grow: 1; flex-direction: column; background-color: #ffecb3; }
-
-/* --- Form Element Styles --- */
-
-/* * The main container for the proficiency bonus bubble.
-* It's designed to be compact, visually distinct, and have a "bubble" or "pill" shape.
+/* * Style option 1: Organizes elements as a column with wrapping.
 */
+.section-column {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 0;
+    align-items: flex-start; /* Aligns items to the start of the container */
+}
+
+/* * Style option 2: Organizes elements as a row without wrapping.
+* Items will overflow if they don't fit, and scrolling can be enabled.
+*/
+.section-row {
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+    align-items: center; /* Vertically centers items in the row */
+}
+
+/* The high-fantasy section header style */
+.section-header {
+    font-family: 'Cinzel Decorative', serif; /* Use the imported fantasy font */
+    font-size: 2.5rem; /* Large font size */
+    font-weight: 700; /* Bold weight */
+    color: #4a3c31; /* A rich, dark brown color */
+    margin-bottom: 20px; /* Space below the header */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    letter-spacing: 2px; /* A little extra space between letters */
+    text-transform: uppercase; /* Makes the text all caps for a grander feel */
+}
+
+/* --- Tabular data --- */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    background-color: #ddd; /* A very light grey background */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 20px;
+}
+
+.table {
+    display: flex; /* Arrange children (rows) in a flex container */
+    max-height: 500px;
+    flex-flow: column wrap; /* Stack the rows vertically */
+    border: 1px solid #333;
+    border-radius: 10px; /* Rounded edges for the container */
+    padding: 10px;
+    gap: 5px;
+    background-color: #f5f5dc; /* A classic beige that is easy on the eyes but distinct */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+
+.table-row {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #333;
+    gap: 10px; /* Creates space between the items inside */
+}
+
+/* * A container to group the related elements and separate them
+* from the rest of the page.
+*/
+.table-cell {
+    display: flex;
+    flex-direction: row nowrap;
+    align-items: center;
+    gap: 15px; /* Space between the label-value pairs */
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px #ccc;
+    border: 1px solid #333;
+}
+
+.label-cell {
+    font-size: 1.1rem;
+    align-items: end;
+    font-weight: bold;
+    color: #444; /* A soft, dark gray for the label */
+    padding-left: 5px;
+}
+
+.input-value-cell {
+    background-color: #fff; /* White background to indicate it's editable */
+    border: 1px solid #333;
+    border-radius: 6px;
+    padding: 10px 12px;
+    font-size: 1rem;
+    color: #000;
+}
+
+/* * Style for the input element (editable).
+*/
+.output-value-cell {
+    background-color: #eee; /* A light gray to indicate non-editable */
+    border: 1px solid #333;
+    border-radius: 6px;
+    padding: 10px 12px;
+    font-size: 1rem;
+    font-style: italic;
+    color: #000;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.checkbox-cell {
+    -webkit-appearance: none;
+    appearance: none;
+    margin: 0;
+    width: 28px;
+    height: 28px;
+    border: 2px solid #333;
+    background-color: #fff;
+    display: grid;
+    place-content: center;
+}
+
+.checkbox-cell::before {
+    content: "";
+    margin: 0;
+    width: 18px;
+    height: 18px;
+    transform: scale(0); /* Invisible by default */
+    box-shadow: inset 1em 1em #007bff; /* Make the checkmark symbol blue */
+    clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%); /* Cuts the shape into a checkmark */
+}
+
+/* Checked state */
+.checkbox-cell:checked {
+    border-color: #007bff; /* Keep background white, just change border */
+}
+
+.checkbox-cell:checked::before {
+    transform: scale(1); /* Make blue checkmark visible now that it is checked */
+}
+
+/* * Style for the select (dropdown) element.
+    */
+.dropdown-value-cell {
+    background-color: #ffffff;
+    border: 1px solid #c2c8d0;
+    min-width: fit-content;
+    border-radius: 6px;
+    padding: 10px 36px 10px 12px;
+    font-size: 1rem;
+    color: #000;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+    -webkit-appearance: none; /* Removes default browser styling on WebKit */
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%235a6470' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+}
+
+/* Style for the input/select when it is focused (clicked on) */
+.input-value-cell:focus,
+.dropdown-value-cell:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.15);
+}
+
+/* --- Text area inputs --- */
+.fantasy-textarea {
+    font-family: 'Bilbo Swash Caps', cursive; /* Use the elegant, handwritten font */
+    font-size: 1.5rem; /* Larger font size for the script style */
+    line-height: 1.6; /* Ample space between lines */
+    color: #333;
+    width: 100%;
+    min-height: 200px; /* Ensures sufficient initial space */
+    padding: 15px;
+    border: 1px solid #c5b8a9;
+    border-radius: 6px;
+    background-color: #fdfaf6; /* A soft, parchment-like color */
+    resize: vertical; /* Allows user to resize vertically only */
+    box-sizing: border-box; /* Ensures padding is included in the total width/height */
+}
+
+
+/* --- Proficiency bonus --- */
 .proficiency-bubble {
     display: inline-flex; /* Aligns children (label and value) in a row */
     flex-grow: 0;
@@ -61,26 +225,18 @@ html, body {
     color: #1c3d5a; /* A dark, desaturated blue for readable text */
     border-radius: 50px; /* Creates the pill/bubble shape */
     padding: 6px 8px 6px 18px; /* Top, Right, Bottom, Left padding for spacing */
-    box-shadow: 0 4px 10px #007bff, 0 1px 3px #0046b3; /* Soft shadow for a "lifted" effect */
     border: 1px solid rgba(255, 255, 255, 0.4); /* Subtle inner border for a glossy look */
-    transition: transform 0.2s ease-out, box-shadow 0.2s ease-out; /* Smooth transition for hover effects */
     cursor: default; /* Changes cursor to show it's not a standard button */
 }
 
-/* A subtle hover effect to make the element feel more interactive */
-.proficiency-bubble:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 15px #007bff, 0 2px 4px #0046b3;
-}
-
-.proficiency-bubble .label-style {
+.proficiency-bubble .label {
     font-weight: 600; /* Semi-bold for clarity */
     font-size: 1rem;   /* Standard font size (16px) */
     margin-right: 12px; /* Creates space between the label and the value circle */
     letter-spacing: 0.5px; /* Adds a bit of breathing room between letters */
 }
 
-.proficiency-bubble .calculated-value-style {
+.proficiency-bubble .value {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -92,118 +248,6 @@ html, body {
     width: 42px;  /* Ensures a consistent circular shape */
     height: 42px;
     box-shadow: inset 0 1px 3px rgba(0,0,0,0.1); /* Inner shadow for a bit of depth */
-}
-
-
-.row-form-element-container {
-    display: flex;
-    flex-flow: row wrap;
-    flex-grow: 1;
-    gap: 0.75rem;
-    text-align: left;
-}
-
-.form-element-container {
-    display: flex;
-    flex-flow: column wrap;
-    flex-grow: 1;
-    gap: 0.75rem;
-    text-align: left;
-}
-
-.label-style {
-    font-size: 0.9rem;
-    font-weight: bold;
-    color: #555;
-    padding: 0.25rem 0;
-}
-.label-style.section-title {
-    font-size: 1.1rem;
-    color: #333;
-    border-bottom: 2px solid #eee;
-    margin-bottom: 0.5rem;
-}
-
-.input-style, 
-select.input-style,
-textarea.input-style {
-    width: 100%;
-    padding: 0.75rem;
-    border: 2px solid #ccc;
-    border-radius: 8px;
-    font-size: 1rem;
-    box-sizing: border-box;
-    transition: border-color 0.3s;
-    background-color: #fff;
-    color: #333;
-    -webkit-appearance: none; /* Removes default browser styling for select */
-    -moz-appearance: none;
-    appearance: none;
-}
-
-.input-style-dropdown {
-    width: 100%;
-    padding: 0.75rem;
-    border: 2px solid #ccc;
-    border-radius: 8px;
-    font-size: 1rem;
-    box-sizing: border-box;
-    transition: border-color 0.3s;
-    background-color: #fff;
-    color: #333;
-    -webkit-appearance: none; /* Removes default browser styling for select */
-    -moz-appearance: none;
-    appearance: none;
-    /* Add custom dropdown arrow */
-    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007CB2%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E');
-    background-repeat: no-repeat;
-    background-position: right .7em top 50%, 0 0;
-    background-size: .65em auto, 100%;
-}
-.input-style:focus {
-    outline: none;
-    border-color: #007bff;
-}
-textarea.input-style {
-    resize: vertical;
-}
-
-.calculated-value-style {
-    width: 100%;
-    padding: 0.75rem;
-    background-color: #e9ecef;
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: bold;
-    color: #495057;
-    box-sizing: border-box;
-    text-align: center;
-}
-
-.checkbox-style {
-    width: 1rem;
-    height: 1rem;
-}
-
-
-/* --- Entry with Proficiency Styles --- */
-.entry-with-proficiency {
-    display: flex;
-    flex-flow: row nowrap;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.25rem;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-.entry-with-proficiency:hover {
-    background-color: #f0f0f0;
-}
-.entry-with-proficiency .label-style {
-    flex-grow: 1;
-    font-size: 0.9rem;
-    font-weight: normal;
 }
 
 /* --- Buttons & Footer --- */

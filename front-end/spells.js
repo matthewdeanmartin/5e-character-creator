@@ -30,7 +30,7 @@ export function openSpellbookPopup() {
                 const knownSpellsContainer = document.getElementById('known-spells');
                 
                 if (!spells || spells.length === 0) {
-                    knownSpellsContainer.innerHTML = '<label class="label-style">No learned spells.</p>';
+                    knownSpellsContainer.innerHTML = '<label class="label">No learned spells.</p>';
                     return;
                 }
 

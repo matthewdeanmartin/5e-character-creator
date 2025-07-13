@@ -45,7 +45,7 @@ const DND_SHEET = {
         document.querySelectorAll('#ability-scores .form-element-container').forEach(c => { 
             data.abilities[c.dataset.ability] = c.querySelector('.ability-score').value; 
         });
-        document.querySelectorAll('#skills .entry-with-proficiency').forEach(element => { 
+        document.querySelectorAll('#skills .table-row').forEach(element => { 
             data.skills[element.dataset.name] = element.classList.contains('proficient'); 
         });
         document.querySelectorAll('#attacks-list .details-grid').forEach(element => {

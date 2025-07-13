@@ -3,7 +3,7 @@ import { getProficiencyBonus, updateAllSkills } from './skills.js';
 import { fetchIndicesFromUrl } from './srd-api/fetch_from_url.js';
 import { BASE_SRD_API_URL, SRD_API_ABILITIES_URL } from './srd-api/consts.js';
 
-const abilitiesContainer = document.getElementById('abilities-title-box');
+const abilitiesContainer = document.getElementById('abilities-table');
 
 export async function initializeAbilities() {
     // Create ability elements in HTML
@@ -15,13 +15,11 @@ export async function initializeAbilities() {
 }
 
 function bindAbilityEvents() {
-    abilitiesContainer.querySelectorAll('.entry-with-proficiency').forEach(entryWithProficiency => {
-        // Should only be one ability score per entry
-        const abilityScoreInput = entryWithProficiency.querySelector('.ability-score');
-        // Should only be one proficiency checkmark per entry
-        const abilityScoreProfCheckbox = entryWithProficiency.querySelector('.checkbox-style');
-        abilityScoreInput.addEventListener('input', () => updateAbility(entryWithProficiency));
-        abilityScoreProfCheckbox.addEventListener('change', () => updateAbility(entryWithProficiency));
+    abilitiesContainer.querySelectorAll('.table-row').forEach(abilityElement => {
+        const scoreInput = document.getElementById(`${abilityElement.id}-score`);
+        const profCheckbox = document.getElementById(`${abilityElement.id}-prof`);
+        scoreInput.addEventListener('input', () => updateAbility(abilityElement));
+        profCheckbox.addEventListener('change', () => updateAbility(abilityElement));
     });
 }
 
@@ -43,27 +41,44 @@ export async function renderAllAbilities() {
 
     // Create new ability HTML element for each ability
     abilitiesResponse.forEach(abilityIndex => {
-        const abilityElement = createAbilityElement(abilityIndex, abilityIndex);
+        const abilityElement = createAbilityElement(abilityIndex);
         abilitiesContainer.appendChild(abilityElement);
     });
 }
 
 function createAbilityElement(abilityIndex) {
     const element = document.createElement('div');
-    element.className = 'entry-with-proficiency';
-    element.id = `${abilityIndex.index}-container`;
+    element.className = 'table-row';
+    element.id = `${abilityIndex.index}`;
 
     // The abilities themselves use the raw index as their ID
     // The saving throws tied to each ability use "{ndex}-save" as their ID
-    element.innerHTML = `
-        <div class="ability-label-container">
-            <input type="checkbox" class="checkbox-style" id="${abilityIndex.index}-prof">
-            <label class="label-style" for="${abilityIndex.index}">${abilityIndex.name}</label>
+    const abilityLabelWithProfHtml = `
+        <div class="table-cell">
+            <label class="label-cell" for="${abilityIndex.index}">Proficiency</label>
+            <input type="checkbox" class="checkbox-cell" id="${abilityIndex.index}-prof">
         </div>
-        <input type="number" class="input-style ability-score" id="${abilityIndex.index}-score" value="10">
-        <div class="calculated-value-style ability-modifier" id="${abilityIndex.index}-modifier">+0</div>
-        <div class="calculated-value-style saving-throw" id="${abilityIndex.index}-save">+0</div>
-        <label class="label-style" for="${abilityIndex.index}-save">Saving Throw</label>
+    `;
+
+    const abilityModHtml = `
+        <div class="table-cell">    
+            <label class="label-cell" for="${abilityIndex.index}">${abilityIndex.name}</label>
+            <input type="number" class="input-value-cell" id="${abilityIndex.index}-score" value="10">
+            <div class="output-value-cell" id="${abilityIndex.index}-modifier">+0</div>
+        </div>
+    `;
+
+    const savingThrowHtml = `
+        <div class="table-cell">
+            <label class="label-cell" for="${abilityIndex.index}-save">Saving Throw</label>
+            <div class="output-value-cell" id="${abilityIndex.index}-save">+0</div>
+        </div>
+    `;
+
+    element.innerHTML = `
+        ${abilityLabelWithProfHtml}
+        ${abilityModHtml}
+        ${savingThrowHtml}
     `;
 
     return element;
@@ -83,15 +98,11 @@ function updateArmorClass() {
     acOutput.textContent = 10 + dexModifier;
 }
 
-export function updateAbility(entryWithProficiency) {
-    // Should only be one ability score per entry
-    const scoreInput = entryWithProficiency.querySelector('.ability-score');
-    // Should only be one proficiency checkmark per entry
-    const profCheckbox = entryWithProficiency.querySelector('.checkbox-style');
-    // Should only be one ability modifier per entry
-    const modifierOutput = entryWithProficiency.querySelector('.ability-modifier');
-    // Should only be one saving throw per entry
-    const savingThrowOutput = entryWithProficiency.querySelector('.saving-throw');
+export function updateAbility(abilityElement) {
+    const scoreInput = document.getElementById(`${abilityElement.id}-score`);
+    const profCheckbox = document.getElementById(`${abilityElement.id}-prof`);
+    const modifierOutput = document.getElementById(`${abilityElement.id}-modifier`);
+    const savingThrowOutput = document.getElementById(`${abilityElement.id}-save`);
 
     // Parse the ability score (assume standard 10 if not known)
     const score = parseInt(scoreInput.value ?? 10, 10);
@@ -114,6 +125,6 @@ export function updateAbility(entryWithProficiency) {
 
 export function updateAllAbilities() {
     // Update all abilities
-    abilitiesContainer.querySelectorAll('.entry-with-proficiency')
-        .forEach(entryWithProficiency => updateAbility(entryWithProficiency));
+    abilitiesContainer.querySelectorAll('.table-row')
+        .forEach(abilityElement => updateAbility(abilityElement));
 }

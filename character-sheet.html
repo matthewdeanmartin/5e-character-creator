@@ -4,7 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>D&D 5e Character Sheet (Flexbox)</title>
+    <title>5th Edition D&D Character Creator</title>
+
+    <!-- Import the "Cinzel Decorative" font from Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Import the "Bilbo Swash Caps" font for the textarea -->
+    <link href="https://fonts.googleapis.com/css2?family=Bilbo+Swash+Caps&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="css/style.css">
     <!-- This script is required to run Go Wasm -->
     <script src="front-end/wasm_exec.js"></script>
@@ -14,156 +22,174 @@
     <!-- Character sheet box -->
     <div class="box-container" id="character-sheet-box">
         <!-- Box #1: Top-level character info box -->
-        <div class="box box-char-info" id="char-info-box">
-            <!-- Organize character info in a column, with character name on top -->
-            <div class="form-element-container" id="char-info-title-box">
-                <div class="row-form-element-container">
+        <div class="content-section section-column" id="char-info-title-box">
+            <div class="content-section section-row">
+                <div class="table-cell">
                     <!-- Character's name -->
-                    <label class="label-style section-title" for="character-name" id="char-name-title">Character Name</label>
-                    <input type="text" id="char-name-text" class="input-style">
-                    <!-- Player's name -->
-                    <label class="label-style" for="player-name" id="player-name-label">Player Name</label>
-                    <input type="text" id="player-name-text" class="input-style">
+                    <label class="label-cell section-header" for="character-name" id="char-name-title">Character Name</label>
+                    <input type="text" id="char-name-text" class="input-value-cell">
                 </div>
-                <!-- Organize other character info in a row, below character name -->
-                <div class="row-form-element-container">
-                    <div class="form-element-container">
-                        <label class="label-style" for="class-dropdown" id="class-label">Class</label>
-                        <select id="class-dropdown" class="input-style-dropdown">
-                            <!--These classes will be populated in JS-->
-                            <option value="">-- Select Class --</option>
-                        </select>
-                    </div>
-                    <div class="form-element-container">
-                        <label class="label-style" for="level-dropdown" id="level-label">Level</label>
-                        <select id="level-dropdown" class="input-style-dropdown">
-                            <option value="">-- Select Level --</option>
-                            <!--These levels will be populated in JS-->
-                        </select>
-                    </div>
-                    <div class="form-element-container">
-                        <label class="label-style" for="background-dropdown" id="background-label">Background</label>
-                        <select id="background-dropdown" class="input-style-dropdown">
-                            <option value="">-- Select Background --</option>
-                            <!--These races will be populated in JS-->
-                        </select>
-                    </div>
-                    <div class="form-element-container">
-                        <label class="label-style" for="race-dropdown" id="race-label">Race</label>
-                        <select id="race-dropdown" class="input-style-dropdown">
-                            <option value="">-- Select Race --</option>
-                            <!--These races will be populated in JS-->
-                        </select>
-                    </div>
-                    <div class="form-element-container">
-                        <label class="label-style" for="alignment-dropdown" id="alignment-label">Alignment</label>
-                        <select id="alignment-dropdown" class="input-style-dropdown">
-                            <option value="">-- Select Alignment --</option>
-                            <!--These alignments will be populated in JS--> 
-                        </select>
-                    </div>
-                    <div class="form-element-container">
-                        <label class="label-style" for="experience" id="experience-label">Experience</label>
-                        <input type="number" id="experience-number" class="input-style">
-                    </div>
+                <div class="table-cell">
+                    <!-- Player's name -->
+                    <label class="label-cell" for="player-name" id="player-name-label">Player Name</label>
+                    <input type="text" id="player-name-text" class="input-value-cell">
+                </div>
+            </div>
+            <!-- Organize other character info in a row, below character name -->
+            <div class="content-section section-row">
+                <div class="table-cell">
+                    <label class="label-cell" for="level-dropdown" id="level-label">Level</label>
+                    <select id="level-dropdown" class="dropdown-value-cell">
+                        <option value="">SELECT LEVEL</option>
+                        <!--These levels will be populated in JS-->
+                    </select>
+                </div>
+                <div class="table-cell">
+                    <label class="label-cell" for="class-dropdown" id="class-label">Class</label>
+                    <select id="class-dropdown" class="dropdown-value-cell">
+                        <!--These classes will be populated in JS-->
+                        <option value="">SELECT CLASS</option>
+                    </select>
+                </div>
+                <div class="table-cell">
+                    <label class="label-cell" for="race-dropdown" id="race-label">Race</label>
+                    <select id="race-dropdown" class="dropdown-value-cell">
+                        <option value="">SELECT RACE</option>
+                        <!--These races will be populated in JS-->
+                    </select>
+                </div>
+            </div>
+            <div class="content-section section-row">
+                <div class="table-cell">
+                    <label class="label-cell" for="background-dropdown" id="background-label">Background</label>
+                    <select id="background-dropdown" class="dropdown-value-cell">
+                        <option value="">SELECT BACKGROUND</option>
+                        <!--These races will be populated in JS-->
+                    </select>
+                </div>
+                
+                <div class="table-cell">
+                    <label class="label-cell" for="alignment-dropdown" id="alignment-label">Alignment</label>
+                    <select id="alignment-dropdown" class="dropdown-value-cell">
+                        <option value="">SELECT ALIGNMENT</option>
+                        <!--These alignments will be populated in JS--> 
+                    </select>
+                </div>
+                
+                <div class="table-cell">
+                    <label class="label-cell" for="experience" id="experience-label">Experience</label>
+                    <input type="number" id="experience-number" class="input-value-cell">
                 </div>
             </div>
         </div>
 
         <!-- Box #2: Ability scores & saving throws box -->
-        <div class="box box-abilities" id="ability-score-box">
-            <!-- Organize ability scores & saving throws in a column -->
-            <div class="form-element-container" id="abilities-title-box">
-                <label class="label-style section-title" id="ability-score-title">Ability Scores</label>
+        <div class="content-section section-column" id="ability-score-box">
+            <label class="label section-header" id="ability-score-title">Ability Scores</label>
+            <!-- Organize ability scores & saving throws in a tabular form -->
+            <div class="table" id="abilities-table">
                 <!-- Abilities, saving throws, and descriptive tooltips will be populated by JS -->
             </div>
         </div>
 
         <!-- Box #3: Skills & saving throws box -->
-        <div class="box box-skills" id="skills-box">
+        <div class="content-section section-column" id="skills-box">
+            <label class="label section-header" id="skills-title">Skills</label>
+            <!-- Organize the proficiency bonus info in a row, below the section title but above the skills themselves -->
+            <div id="prof-bonus-box" class="proficiency-bubble">
+                <label class="label" id="prof-bonus-label">Proficiency Bonus</label>
+                <div class="value" id="prof-bonus-output">+2</div>
+            </div>
             <!-- Organize skills & saving throws in a column, allowing them to wrap into multiple columns if required by Box #3 -->
-            <div id="skills-title-box" class="form-element-container">
-                <label class="label-style section-title" id="skills-title">Skills</label>
-                <!-- Organize the proficiency bonus info in a row, below the section title but above the skills themselves -->
-                <div id="prof-bonus-box" class="proficiency-bubble">
-                    <label class="label-style" id="prof-bonus-label">Proficiency Bonus</label>
-                    <div class="calculated-value-style" id="prof-bonus-output">+2</div>
-                </div>
+            <div class="table" id="skills-table">    
                 <!-- Skills inserted by JS -->
             </div>
         </div>
 
         <!-- Box #4: Combat info box -->
-        <div class="box box-combat">
-            <!-- Place combat info in row below the section title -->
-            <div class="form-element-container" id="combat-info-title-box">
-                <label class="label-style section-title" id="combat-title">Combat</label>
-                <!-- Organize combat info in a row -->
-                <div class="row-form-element-container" id="combat-info-box">
-                    <div id="armor-class-container">
-                        <label class="label-style" id="ac-label">Armor Class</label>
-                        <div class="calculated-value-style" id="ac-output">10</div>
+        <!-- Place combat info in row below the section title -->
+        <div class="content-section section-column" id="combat-info-title-box">
+            <label class="label section-header" id="combat-title">Combat</label>
+            <div class="section-row">
+                <!-- One table for the combat info (AC, initiative, and speed) -->
+                <div class="table">
+                    <div class="table-cell" id="armor-class-pair" >
+                        <label class="label" id="ac-label">Armor Class</label>
+                        <div class="value" id="ac-output">10</div>
                     </div>
-                    <div>
-                        <label class="label-style" id="initiative-label">Initiative</label>
-                        <div class="calculated-value-style" id="initiative-output">+0</div>
+                    <div class="table-cell" id="initiative-pair">
+                        <label class="label" id="initiative-label">Initiative</label>
+                        <div class="value" id="initiative-output">+0</div>
                     </div>
-                    <div>
-                        <label class="label-style" id="speed-label">Speed</label>
-                        <div class="calculated-value-style" id="speed-output">30</div>
+                    <div class="table-cell" id="speed-pair">
+                        <label class="label" id="speed-label">Speed</label>
+                        <div class="value" id="speed-output">30</div>
                     </div>
                 </div>
-                <label class="label-style" id="hit-points-label">Hit Points</label>
-                <input type="number" class="input-style" id="hp-max-input">
-                <input type="number" class="input-style" id="hp-current-input">
-                <input type="number" class="input-style" id="hp-temp-input">0</input>
+                <!-- One table for hit points -->
+                <div class="table">
+                    <div class="table-cell">
+                        <label class="label-cell" id="hit-points-label">Hit Points</label>
+                        <input type="number" class="input-value-cell" id="hp-max-input">
+                    </div>
+                    <div class="table-cell">
+                        <label class="label-cell" id="current-hit-points-label">Current Hit Points</label>
+                        <input type="number" class="input-value-cell" id="hp-current-input">
+                    </div>
+                    <div class="table-cell">
+                        <label class="label-cell" id="temp-hit-points-label">Temporary Hit Points</label>
+                        <input type="number" class="input-value-cell" id="hp-temp-input">0</input>
+                    </div>
+                </div>
+            </div>
+            <!-- Place buttons for calculating hit points in a row below the two tables-->
+            <div class="section-row">
                 <button class="btn btn-green" id="roll-hit-points">Roll Hit Points</button>
                 <button class="btn" id="calc-avg-hit-points">Load Average Hit Points</button>
             </div>
         </div>
-
+        
         <!-- Box #5: Martial attacks & character features box -->
 
         <!-- Box #6: Spellbook box -->
-        <div class="box box-spells">
-            <label class="label-style section-title" id="spellbook-title">Known Spells</label>
-            <div class="row-form-element-container" id="spellbook-selector-box">
-                <label class="label-style" id="spellbook-selector-label">Open the spellbook to browse and learn spells. 
+        <div class="content-section section-column">
+            <label class="label section-header" id="spellbook-title">Known Spells</label>
+            <div class="section section-row" id="spellbook-selector-box">
+                <label class="label-cell" id="spellbook-selector-label">Open the spellbook to browse and learn spells. 
                     Your learned spells will appear in the table below</label>
                 <button id="open-spellbook-btn" class="btn">Learn Spells from Spellbook</button>
             </div>
-            <div class="form-element-container" id="known-spells">
+            <div class="section section-column" id="known-spells">
                 <!-- Selected spells will be populated in JS here -->
             </div>
         </div>
 
         <!-- Box #7: Character personality & equipment box -->
-        <div class="box box-personality-equipment" id="personality-equipment-box">
-            <!-- Organize personality entries into a column -->
-            <div class="form-element-container" id="personality-box">
-                <label class="label-style section-title" id="personality-title">Personality</label>
-                <textarea class="input-style" rows="4" col="20" 
-                    placeholder="Type personality traits here..." id="personality-free-text"></textarea>
-                <textarea class="input-style" rows="4" col="20" 
-                    placeholder="Type ideals here..." id="ideals-free-text"></textarea>
-                <textarea class="input-style" rows="4" col="20" 
-                    placeholder="Type bonds here..." id="bonds-free-text"></textarea>
-                <textarea class="input-style" rows="4" col="20" 
-                    placeholder="Type flaws here..." id="flaws-free-text"></textarea>
-            </div>
-            <!-- Organize equipment log entries into a column -->
-            <div class="form-element-container">
-                <label class="label-style section-title" id="equipment-title">Equipment</label>
-                <div id="equipment-list">
-                    <!-- Equipment will be populated in JS when "Add Equipment" is pressed -->
+        <div class="content-section section-column" id="personality-equipment-box">
+            <label class="label section-header" id="personality-title">Personality</label>
+            <div class="table">
+                <div class="table-cell">
+                    <textarea class="fantasy-textarea" rows="4" col="20" 
+                        placeholder="Type personality traits here..." id="personality-free-text"></textarea>
                 </div>
-                <button id="add-equipment-button" class="btn">Add Equipment</button>
+                <div class="table-cell">
+                    <textarea class="fantasy-textarea" rows="4" col="20" 
+                        placeholder="Type ideals here..." id="ideals-free-text"></textarea>
+                </div>
+                <div class="table-cell">
+                    <textarea class="fantasy-textarea" rows="4" col="20" 
+                        placeholder="Type bonds here..." id="bonds-free-text"></textarea>
+                </div>
+                <div class="table-cell">
+                    <textarea class="fantasy-textarea" rows="4" col="20" 
+                        placeholder="Type flaws here..." id="flaws-free-text"></textarea>
+                </div>
             </div>
         </div>
 
     </div>
 
-    <footer class="sheet-footer">
+    <footer class="section section-row">
         <button class="btn btn-green" id="save-char-button">Save Character</button>
         <button class="btn" id="load-char-button">Load Character</button>
         <button class="btn btn-red" id="clear-char-button">Clear Character</button>
