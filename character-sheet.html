@@ -6,12 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>5th Edition D&D Character Creator</title>
 
-    <!-- Import the "Cinzel Decorative" font from Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Import the "Cinzel Decorative" font for section headers -->
     <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet">
-    <!-- Import the "Bilbo Swash Caps" font for the textarea -->
+    <!-- Import the "Bilbo Swash Caps" font for free-form textarea inputs -->
     <link href="https://fonts.googleapis.com/css2?family=Bilbo+Swash+Caps&display=swap" rel="stylesheet">
+    <!-- Import the "Roboto" font for the rest of the webpage -->
+    <link hrf="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="css/style.css">
     <!-- This script is required to run Go Wasm -->
@@ -19,183 +21,367 @@
 </head>
 
 <body>
-    <!-- Character sheet box -->
-    <div class="box-container" id="character-sheet-box">
-        <!-- Box #1: Top-level character info box -->
-        <div class="content-section section-column" id="char-info-title-box">
-            <div class="content-section section-row">
-                <div class="table-cell">
-                    <!-- Character's name -->
-                    <label class="label-cell section-header" for="character-name" id="char-name-title">Character Name</label>
-                    <input type="text" id="char-name-text" class="input-value-cell">
+    <div class="page-container">
+        <!-- Section 1: Character Info -->
+        <div class="section-box" style="flex-grow: 2;">
+            <div class="section-column">
+                <h2>Character Info</h2>
+                <div class="content-group"><label for="charName">Character Name</label><input type="text" id="charName"
+                        name="charName"></div>
+                <div class="content-group"><label for="playerName">Player Name</label><input type="text" id="playerName"
+                        name="playerName"></div>
+                <div class="section-row">
+                    <div class="content-group"><label for="class">Class</label><select id="class" name="class">
+                        </select></div>
+                    <div class="content-group"><label for="level">Level</label><select id="level" name="level">
+                        </select></div>
+                    <div class="content-group"><label for="race">Race</label><select id="race" name="race">
+                        </select></div>
                 </div>
-                <div class="table-cell">
-                    <!-- Player's name -->
-                    <label class="label-cell" for="player-name" id="player-name-label">Player Name</label>
-                    <input type="text" id="player-name-text" class="input-value-cell">
+                <div class="section-row">
+                    <div class="content-group"><label for="background">Background</label><select id="background"
+                            name="background">
+                            <option>Acolyte</option>
+                            <option>Charlatan</option>
+                            <option>Criminal</option>
+                            <option>Entertainer</option>
+                            <option>Folk Hero</option>
+                            <option>Noble</option>
+                            <option>Outlander</option>
+                            <option>Sage</option>
+                            <option>Soldier</option>
+                        </select></div>
+                    <div class="content-group"><label for="alignment">Alignment</label><select id="alignment"
+                            name="alignment">
+                            <option>Lawful Good</option>
+                            <option>Neutral Good</option>
+                            <option>Chaotic Good</option>
+                            <option>Lawful Neutral</option>
+                            <option>True Neutral</option>
+                            <option>Chaotic Neutral</option>
+                            <option>Lawful Evil</option>
+                            <option>Neutral Evil</option>
+                            <option>Chaotic Evil</option>
+                        </select></div>
                 </div>
+                <div class="content-group"><label for="xp">Experience Points</label><input type="number" id="xp"
+                        name="xp" value="0"></div>
             </div>
-            <!-- Organize other character info in a row, below character name -->
-            <div class="content-section section-row">
-                <div class="table-cell">
-                    <label class="label-cell" for="level-dropdown" id="level-label">Level</label>
-                    <select id="level-dropdown" class="dropdown-value-cell">
-                        <option value="">SELECT LEVEL</option>
-                        <!--These levels will be populated in JS-->
-                    </select>
-                </div>
-                <div class="table-cell">
-                    <label class="label-cell" for="class-dropdown" id="class-label">Class</label>
-                    <select id="class-dropdown" class="dropdown-value-cell">
-                        <!--These classes will be populated in JS-->
-                        <option value="">SELECT CLASS</option>
-                    </select>
-                </div>
-                <div class="table-cell">
-                    <label class="label-cell" for="race-dropdown" id="race-label">Race</label>
-                    <select id="race-dropdown" class="dropdown-value-cell">
-                        <option value="">SELECT RACE</option>
-                        <!--These races will be populated in JS-->
-                    </select>
-                </div>
+        </div>
+
+        <!-- Section 2: Abilities and Saving Throws -->
+        <div class="section-box" style="flex-grow: 4;">
+            <h2>Abilities and Saving Throws</h2>
+            <div class="proficiency-bonus-group"><label>Proficiency Bonus</label>
+                <div class="calculated-value">+2</div>
             </div>
-            <div class="content-section section-row">
-                <div class="table-cell">
-                    <label class="label-cell" for="background-dropdown" id="background-label">Background</label>
-                    <select id="background-dropdown" class="dropdown-value-cell">
-                        <option value="">SELECT BACKGROUND</option>
-                        <!--These races will be populated in JS-->
-                    </select>
+            <div class="section-row" style="margin-top: 20px;">
+                <div class="section-column" style="flex-grow:1;">
+                    <h3>Abilities</h3>
+                    <div class="content-group"><label>Strength</label>
+                        <div class="calculated-value">+0</div>
+                    </div>
+                    <div class="content-group"><label>Dexterity</label>
+                        <div class="calculated-value">+0</div>
+                    </div>
+                    <div class="content-group"><label>Constitution</label>
+                        <div class="calculated-value">+0</div>
+                    </div>
+                    <div class="content-group"><label>Intelligence</label>
+                        <div class="calculated-value">+0</div>
+                    </div>
+                    <div class="content-group"><label>Wisdom</label>
+                        <div class="calculated-value">+0</div>
+                    </div>
+                    <div class="content-group"><label>Charisma</label>
+                        <div class="calculated-value">+0</div>
+                    </div>
                 </div>
-                
-                <div class="table-cell">
-                    <label class="label-cell" for="alignment-dropdown" id="alignment-label">Alignment</label>
-                    <select id="alignment-dropdown" class="dropdown-value-cell">
-                        <option value="">SELECT ALIGNMENT</option>
-                        <!--These alignments will be populated in JS--> 
-                    </select>
-                </div>
-                
-                <div class="table-cell">
-                    <label class="label-cell" for="experience" id="experience-label">Experience</label>
-                    <input type="number" id="experience-number" class="input-value-cell">
+                <div class="section-column" style="flex-grow:1;">
+                    <h3>Saving Throws</h3>
+                    <div class="content-group"><label>Strength</label>
+                        <div class="calculated-value">+0</div>
+                    </div>
+                    <div class="content-group"><label>Dexterity</label>
+                        <div class="calculated-value">+0</div>
+                    </div>
+                    <div class="content-group"><label>Constitution</label>
+                        <div class="calculated-value">+0</div>
+                    </div>
+                    <div class="content-group"><label>Intelligence</label>
+                        <div class="calculated-value">+0</div>
+                    </div>
+                    <div class="content-group"><label>Wisdom</label>
+                        <div class="calculated-value">+0</div>
+                    </div>
+                    <div class="content-group"><label>Charisma</label>
+                        <div class="calculated-value">+0</div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Box #2: Ability scores & saving throws box -->
-        <div class="content-section section-column" id="ability-score-box">
-            <label class="label section-header" id="ability-score-title">Ability Scores</label>
-            <!-- Organize ability scores & saving throws in a tabular form -->
-            <div class="table" id="abilities-table">
-                <!-- Abilities, saving throws, and descriptive tooltips will be populated by JS -->
+        <!-- Section 3: Skills -->
+        <div class="section-box" style="flex-grow: 4;">
+            <div class="section-column" style="flex-grow: 1;">
+                <h2>Skills</h2>
+                <div class="content-group"><label>Acrobatics</label>
+                    <div class="calculated-value">+0</div>
+                </div>
+                <div class="content-group"><label>Animal Handling</label>
+                    <div class="calculated-value">+0</div>
+                </div>
+                <div class="content-group"><label>Arcana</label>
+                    <div class="calculated-value">+0</div>
+                </div>
+                <div class="content-group"><label>Athletics</label>
+                    <div class="calculated-value">+0</div>
+                </div>
+                <div class="content-group"><label>Deception</label>
+                    <div class="calculated-value">+0</div>
+                </div>
+                <div class="content-group"><label>History</label>
+                    <div class="calculated-value">+0</div>
+                </div>
+                <div class="content-group"><label>Insight</label>
+                    <div class="calculated-value">+0</div>
+                </div>
+                <div class="content-group"><label>Intimidation</label>
+                    <div class="calculated-value">+0</div>
+                </div>
+                <div class="content-group"><label>Investigation</label>
+                    <div class="calculated-value">+0</div>
+                </div>
+            </div>
+            <div class="section-column" style="flex-grow: 1;">
+                <h2>Continued</h2>
+                <div class="content-group"><label>Medicine</label>
+                    <div class="calculated-value">+0</div>
+                </div>
+                <div class="content-group"><label>Nature</label>
+                    <div class="calculated-value">+0</div>
+                </div>
+                <div class="content-group"><label>Perception</label>
+                    <div class="calculated-value">+0</div>
+                </div>
+                <div class="content-group"><label>Performance</label>
+                    <div class="calculated-value">+0</div>
+                </div>
+                <div class="content-group"><label>Persuasion</label>
+                    <div class="calculated-value">+0</div>
+                </div>
+                <div class="content-group"><label>Religion</label>
+                    <div class="calculated-value">+0</div>
+                </div>
+                <div class="content-group"><label>Sleight of Hand</label>
+                    <div class="calculated-value">+0</div>
+                </div>
+                <div class="content-group"><label>Stealth</label>
+                    <div class="calculated-value">+0</div>
+                </div>
+                <div class="content-group"><label>Survival</label>
+                    <div class="calculated-value">+0</div>
+                </div>
             </div>
         </div>
 
-        <!-- Box #3: Skills & saving throws box -->
-        <div class="content-section section-column" id="skills-box">
-            <label class="label section-header" id="skills-title">Skills</label>
-            <!-- Organize the proficiency bonus info in a row, below the section title but above the skills themselves -->
-            <div id="prof-bonus-box" class="proficiency-bubble">
-                <label class="label" id="prof-bonus-label">Proficiency Bonus</label>
-                <div class="value" id="prof-bonus-output">+2</div>
-            </div>
-            <!-- Organize skills & saving throws in a column, allowing them to wrap into multiple columns if required by Box #3 -->
-            <div class="table" id="skills-table">    
-                <!-- Skills inserted by JS -->
-            </div>
-        </div>
-
-        <!-- Box #4: Combat info box -->
-        <!-- Place combat info in row below the section title -->
-        <div class="content-section section-column" id="combat-info-title-box">
-            <label class="label section-header" id="combat-title">Combat</label>
+        <!-- Section 3: Combat Info -->
+        <div class="section-box" style="flex-grow: 2;">
+            <h2>Combat Info</h2>
             <div class="section-row">
-                <!-- One table for the combat info (AC, initiative, and speed) -->
-                <div class="table">
-                    <div class="table-cell" id="armor-class-pair" >
-                        <label class="label" id="ac-label">Armor Class</label>
-                        <div class="value" id="ac-output">10</div>
-                    </div>
-                    <div class="table-cell" id="initiative-pair">
-                        <label class="label" id="initiative-label">Initiative</label>
-                        <div class="value" id="initiative-output">+0</div>
-                    </div>
-                    <div class="table-cell" id="speed-pair">
-                        <label class="label" id="speed-label">Speed</label>
-                        <div class="value" id="speed-output">30</div>
-                    </div>
+                <div class="content-group"><label>Armor Class</label>
+                    <div class="calculated-value">10</div>
                 </div>
-                <!-- One table for hit points -->
-                <div class="table">
-                    <div class="table-cell">
-                        <label class="label-cell" id="hit-points-label">Hit Points</label>
-                        <input type="number" class="input-value-cell" id="hp-max-input">
-                    </div>
-                    <div class="table-cell">
-                        <label class="label-cell" id="current-hit-points-label">Current Hit Points</label>
-                        <input type="number" class="input-value-cell" id="hp-current-input">
-                    </div>
-                    <div class="table-cell">
-                        <label class="label-cell" id="temp-hit-points-label">Temporary Hit Points</label>
-                        <input type="number" class="input-value-cell" id="hp-temp-input">0</input>
-                    </div>
+                <div class="content-group"><label>Initiative</label>
+                    <div class="calculated-value">+0</div>
+                </div>
+                <div class="content-group"><label>Speed</label>
+                    <div class="calculated-value">30ft</div>
                 </div>
             </div>
-            <!-- Place buttons for calculating hit points in a row below the two tables-->
+            <div class="content-group"><label>Hit Points</label>
+                <div class="section-row">
+                    <div class="content-group"><label for="hpMax">HP Maximum</label><input type="number" id="hpMax"
+                            name="hpMax" value="10"></div>
+                    <div class="content-group"><label for="hpCurrent">Current HP</label><input type="number"
+                            id="hpCurrent" name="hpCurrent" value="10"></div>
+                </div>
+            </div>
+            <div class="content-group"><label for="hpTemp">Temporary Hit Points</label><input type="number" id="hpTemp"
+                    name="hpTemp" value="0"></div>
             <div class="section-row">
-                <button class="btn btn-green" id="roll-hit-points">Roll Hit Points</button>
-                <button class="btn" id="calc-avg-hit-points">Load Average Hit Points</button>
-            </div>
-        </div>
-        
-        <!-- Box #5: Martial attacks & character features box -->
-
-        <!-- Box #6: Spellbook box -->
-        <div class="content-section section-column">
-            <label class="label section-header" id="spellbook-title">Known Spells</label>
-            <div class="section section-row" id="spellbook-selector-box">
-                <label class="label-cell" id="spellbook-selector-label">Open the spellbook to browse and learn spells. 
-                    Your learned spells will appear in the table below</label>
-                <button id="open-spellbook-btn" class="btn">Learn Spells from Spellbook</button>
-            </div>
-            <div class="section section-column" id="known-spells">
-                <!-- Selected spells will be populated in JS here -->
-            </div>
-        </div>
-
-        <!-- Box #7: Character personality & equipment box -->
-        <div class="content-section section-column" id="personality-equipment-box">
-            <label class="label section-header" id="personality-title">Personality</label>
-            <div class="table">
-                <div class="table-cell">
-                    <textarea class="fantasy-textarea" rows="4" col="20" 
-                        placeholder="Type personality traits here..." id="personality-free-text"></textarea>
+                <div class="content-group"><label>Hit Dice</label>
+                    <div class="section-row">
+                        <div class="content-group"><label>Total</label>
+                            <div class="calculated-value">1d8</div>
+                        </div>
+                        <div class="content-group"><label for="hdCurrent">Current</label><input type="number"
+                                id="hdCurrent" name="hdCurrent" value="1" min="0" max="1"></div>
+                    </div>
                 </div>
-                <div class="table-cell">
-                    <textarea class="fantasy-textarea" rows="4" col="20" 
-                        placeholder="Type ideals here..." id="ideals-free-text"></textarea>
-                </div>
-                <div class="table-cell">
-                    <textarea class="fantasy-textarea" rows="4" col="20" 
-                        placeholder="Type bonds here..." id="bonds-free-text"></textarea>
-                </div>
-                <div class="table-cell">
-                    <textarea class="fantasy-textarea" rows="4" col="20" 
-                        placeholder="Type flaws here..." id="flaws-free-text"></textarea>
+                <div class="content-group"><label>Death Saves</label>
+                    <div class="section-row">
+                        <div class="content-group"><label for="dsSuccess">Successes</label><input type="number"
+                                id="dsSuccess" name="dsSuccess" value="0" min="0" max="3"></div>
+                        <div class="content-group"><label for="dsFail">Failures</label><input type="number" id="dsFail"
+                                name="dsFail" value="0" min="0" max="3"></div>
+                    </div>
                 </div>
             </div>
         </div>
 
+        <!-- Section 4: Attacks & Spellcasting -->
+        <div class="section-box" style="flex-grow: 4;">
+            <h2>Attacks & Spellcasting</h2>
+            <div class="table" id="attacks-table">
+                <div class="table-header"><label>Name</label><label>Atk Bonus</label><label>Damage / Type</label></div>
+            </div>
+            <button class="action-button" id="add-weapon-btn">Add Weapon from List</button>
+        </div>
+
+        <!-- Section 5: Spellcasting -->
+        <div class="section-box" style="flex-grow: 6; width: 100%;">
+            <h2>Spellcasting</h2>
+            <div class="section-row">
+                <div class="content-group"><label for="spellClass">Spellcasting Class</label><select id="spellClass"
+                        name="spellClass">
+                        <option>Bard</option>
+                        <option>Cleric</option>
+                        <option>Druid</option>
+                        <option>Paladin</option>
+                        <option>Ranger</option>
+                        <option>Sorcerer</option>
+                        <option>Warlock</option>
+                        <option>Wizard</option>
+                    </select></div>
+                <div class="content-group"><label for="spellAbility">Spellcasting Ability</label><select
+                        id="spellAbility" name="spellAbility">
+                        <option>Strength</option>
+                        <option>Dexterity</option>
+                        <option>Constitution</option>
+                        <option>Intelligence</option>
+                        <option>Wisdom</option>
+                        <option>Charisma</option>
+                    </select></div>
+                <div class="content-group"><label for="spellDC">Spell Save DC</label><input type="number" id="spellDC"
+                        name="spellDC" value="10"></div>
+                <div class="content-group"><label for="spellAttack">Spell Attack Bonus</label><input type="number"
+                        id="spellAttack" name="spellAttack" value="2"></div>
+            </div>
+
+            <!-- Spell Level Tables will be generated here by JavaScript -->
+            <div id="spell-tables-container"></div>
+        </div>
     </div>
 
-    <footer class="section section-row">
-        <button class="btn btn-green" id="save-char-button">Save Character</button>
-        <button class="btn" id="load-char-button">Load Character</button>
-        <button class="btn btn-red" id="clear-char-button">Clear Character</button>
-    </footer>
+    <!-- Weapon Selection Modal -->
+    <div class="modal-overlay" id="weapon-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Select Weapons</h2><button class="close-button" id="close-weapon-modal-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <table class="data-table" id="weapon-selection-table">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Name</th>
+                            <th>Damage Dice and Total</th>
+                            <th>Properties</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr data-name="Club" data-damage="1d4 bludgeoning" data-bonus="0">
+                            <td><input type="checkbox"></td>
+                            <td>Club</td>
+                            <td>1d4 bludgeoning</td>
+                            <td>Light</td>
+                        </tr>
+                        <tr data-name="Dagger" data-damage="1d4 piercing" data-bonus="0">
+                            <td><input type="checkbox"></td>
+                            <td>Dagger</td>
+                            <td>1d4 piercing</td>
+                            <td>Finesse, light, thrown (20/60)</td>
+                        </tr>
+                        <tr data-name="Greatclub" data-damage="1d8 bludgeoning" data-bonus="0">
+                            <td><input type="checkbox"></td>
+                            <td>Greatclub</td>
+                            <td>1d8 bludgeoning</td>
+                            <td>Two-handed</td>
+                        </tr>
+                        <tr data-name="Handaxe" data-damage="1d6 slashing" data-bonus="0">
+                            <td><input type="checkbox"></td>
+                            <td>Handaxe</td>
+                            <td>1d6 slashing</td>
+                            <td>Light, thrown (20/60)</td>
+                        </tr>
+                        <tr data-name="Javelin" data-damage="1d6 piercing" data-bonus="0">
+                            <td><input type="checkbox"></td>
+                            <td>Javelin</td>
+                            <td>1d6 piercing</td>
+                            <td>Thrown (30/120)</td>
+                        </tr>
+                        <tr data-name="Light Hammer" data-damage="1d4 bludgeoning" data-bonus="0">
+                            <td><input type="checkbox"></td>
+                            <td>Light Hammer</td>
+                            <td>1d4 bludgeoning</td>
+                            <td>Light, thrown (20/60)</td>
+                        </tr>
+                        <tr data-name="Mace" data-damage="1d6 bludgeoning" data-bonus="0">
+                            <td><input type="checkbox"></td>
+                            <td>Mace</td>
+                            <td>1d6 bludgeoning</td>
+                            <td>-</td>
+                        </tr>
+                        <tr data-name="Quarterstaff" data-damage="1d6 bludgeoning" data-bonus="0">
+                            <td><input type="checkbox"></td>
+                            <td>Quarterstaff</td>
+                            <td>1d6 bludgeoning</td>
+                            <td>Versatile (1d8)</td>
+                        </tr>
+                        <tr data-name="Shortbow" data-damage="1d6 piercing" data-bonus="0">
+                            <td><input type="checkbox"></td>
+                            <td>Shortbow</td>
+                            <td>1d6 piercing</td>
+                            <td>Ammunition (80/320), two-handed</td>
+                        </tr>
+                        <tr data-name="Longsword" data-damage="1d8 slashing" data-bonus="0">
+                            <td><input type="checkbox"></td>
+                            <td>Longsword</td>
+                            <td>1d8 slashing</td>
+                            <td>Versatile (1d10)</td>
+                        </tr>
+                        <tr data-name="Greataxe" data-damage="1d12 slashing" data-bonus="0">
+                            <td><input type="checkbox"></td>
+                            <td>Greataxe</td>
+                            <td>1d12 slashing</td>
+                            <td>Heavy, two-handed</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer" style="text-align: right; margin-top: 20px;"><button class="action-button"
+                    id="done-selecting-weapon-btn">Done Selecting Weapons</button></div>
+        </div>
+    </div>
 
-    <script src="front-end/core.js" type="module"></script>
+    <!-- Spell Selection Modal -->
+    <div class="modal-overlay" id="spell-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="spell-modal-title">Select Spells</h2><button class="close-button"
+                    id="close-spell-modal-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="spell-list-container" id="spell-selection-container">
+                    <!-- Spell cards for selection will be generated here -->
+                </div>
+            </div>
+            <div class="modal-footer" style="text-align: right; margin-top: 20px;"><button class="action-button"
+                    id="done-selecting-spell-btn">Done Selecting Spells</button></div>
+        </div>
+    </div>
+    <script src="front-end/main.js" type="module"></script>
 </body>
 
 </html>

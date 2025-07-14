@@ -36,6 +36,8 @@ export async function fetchIndicesFromUrl(fetchUrl) {
 }
 
 export async function batchFetchDetailsFromApi(entryIndices=[]) {
+    let detailsResponses = [];
+    
     // Check if it is necessary to batch the fetches
     if (entryIndices.length < BATCH_SIZE) {
         // Build batch of Promises to fetch details
@@ -44,12 +46,9 @@ export async function batchFetchDetailsFromApi(entryIndices=[]) {
                 fetch(BASE_SRD_API_URL + entryIndex.url).then((response) => response.json())
             );
         // Await current batch of details
-        const detailsResponses = await Promise.all(promises);
-
-        return detailsResponses;
+        detailsResponses = await Promise.all(promises);
     }
 
-    let detailsResponses = [];
     // It is necessary to batch the fetches, slice the entry indices according to maximum batch size
     for (let batchInd = 0; batchInd < entryIndices.length; batchInd += BATCH_SIZE) {
         const batchedIndices = entryIndices.slice(batchInd, batchInd + BATCH_SIZE);

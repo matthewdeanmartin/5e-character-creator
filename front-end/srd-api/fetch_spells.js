@@ -6,7 +6,7 @@ import { fetchIndicesFromUrl, batchFetchDetailsFromApi } from './fetch_from_url.
  * Caches the full list if it's the first time fetching all spells.
  * @returns {Array} The complete list of all spells.
  */
-export async function fetchSpellsByFilter(schools=[], levels=[]) {
+export async function fetchSpellsByFilter(schools=[], levels=[], classes=[]) {
     const fetchUrl = buildSrdApiUrl_spells(schools, levels);
     
     console.log(`Fetching spells from: ${fetchUrl}`);
@@ -15,6 +15,15 @@ export async function fetchSpellsByFilter(schools=[], levels=[]) {
         const spellIndices = await fetchIndicesFromUrl(fetchUrl);
         // Extract spells from spell indices
         const spells = batchFetchDetailsFromApi(spellIndices);
+     
+        if (spells.length) {
+            // Filter by classes able to cast the matching spells
+            spells.filter(spell => {
+                // Check if one of the requested classes can cast this spell
+                const classCanCastThisSpell = spell.classes.some(spell => classes.includes(spell.name));
+                return classCanCastThisSpell;
+            });
+        }
         
         return spells;
     } catch (error) {

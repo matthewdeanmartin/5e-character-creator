@@ -1,366 +1,378 @@
-/* Basic reset and full-screen setup */
-html, body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+/* --- Base & Typography Styles --- */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f0f4f8;
     color: #333;
-    line-height: 1.6;
-    background-color: #f0f0f0;
-}
-
-/* The main container that will hold all the boxes */
-.box-container {
-    display: flex; /* Enables Flexbox layout */
-    flex-wrap: wrap; /* Allows items to wrap to the next line */
-    gap: 1rem; /* This creates the buffer/space between all boxes */
-    padding: 1rem; /* Adds padding around the entire container */
-    box-sizing: border-box; /* Ensures padding is included in the total width/height */
-}
-
-/* * Base style for the flexible container div.
-* This style is shared by both the row and column variants.
-*/
-.content-section {
-    display: flex;
-    flex-basis: 90%;
+    margin: 0;
     padding: 20px;
-    max-height: 800px;
-    border-radius: 12px; /* Rounded edges */
-    background-color: #e6f7ff; /* A very light cyan for clean, modern vibe */
-    border: 1px solid #333444;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.07); /* Soft shadow to lift it off the page */
-    gap: 15px; /* Creates space between the items inside */
 }
 
-/* * Style option 1: Organizes elements as a column with wrapping.
-*/
-.section-column {
+.page-container {
     display: flex;
-    flex-direction: column;
-    flex-grow: 0;
-    align-items: flex-start; /* Aligns items to the start of the container */
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: flex-start;
 }
 
-/* * Style option 2: Organizes elements as a row without wrapping.
-* Items will overflow if they don't fit, and scrolling can be enabled.
-*/
+h2 {
+    font-family: 'Cinzel Decorative', cursive;
+    color: #005a9c;
+    margin-top: 0;
+    font-weight: 700;
+    border-bottom: 2px solid rgba(0, 90, 156, 0.1);
+    padding-bottom: 10px;
+}
+
+h3 {
+    font-family: 'Cinzel Decorative', cursive;
+    color: #004070;
+    font-size: 1.1em;
+    margin-bottom: 10px;
+    margin-top: 0;
+    font-weight: 400;
+}
+
+.long-form-text,
+textarea.long-form-text {
+    font-family: 'Bilbo Swash Caps', cursive;
+    font-size: 1.6em;
+    color: #004070;
+    background-color: #e6f0f7;
+    border: 1px solid #cce0f0;
+    border-radius: 8px;
+    padding: 15px;
+    line-height: 1.6;
+}
+
+textarea.long-form-text {
+    width: calc(100% - 32px);
+    min-height: 120px;
+    resize: vertical;
+}
+
+.section-box {
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 4px 12px rgba(0, 90, 156, 0.08);
+    border: 1px solid #dbe9f5;
+    min-width: 500px;
+    flex-basis: 0;
+    box-sizing: border-box;
+    /* Properties for Compactness & Scrolling --- */
+    display: flex;
+    max-height: 70vh;
+    /* Add a vertical scrollbar if content overflows */
+    overflow-y: auto;
+    /* Use flexbox to manage internal layout */
+    flex-flow: column wrap;
+    /* Stack children (like h2 and content) vertically */
+}
+
 .section-row {
     display: flex;
-    flex-direction: row;
-    flex-grow: 1;
-    align-items: center; /* Vertically centers items in the row */
+    max-width: 25vw;
+    flex-flow: row nowrap;
+    /* Add a horizontal scrollbar if content overflows */
+    overflow-x: auto;
+    gap: 20px;
+    align-items: flex-end;
 }
 
-/* The high-fantasy section header style */
-.section-header {
-    font-family: 'Cinzel Decorative', serif; /* Use the imported fantasy font */
-    font-size: 2.5rem; /* Large font size */
-    font-weight: 700; /* Bold weight */
-    color: #4a3c31; /* A rich, dark brown color */
-    margin-bottom: 20px; /* Space below the header */
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-    letter-spacing: 2px; /* A little extra space between letters */
-    text-transform: uppercase; /* Makes the text all caps for a grander feel */
-}
-
-/* --- Tabular data --- */
-body {
+.section-column {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 10px;
-    background-color: #ddd; /* A very light grey background */
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    padding: 20px;
+    flex-flow: column wrap;
+    min-width: 125px;
+    gap: 15px;
 }
 
 .table {
-    display: flex; /* Arrange children (rows) in a flex container */
-    max-height: 500px;
-    flex-flow: column wrap; /* Stack the rows vertically */
-    border: 1px solid #333;
-    border-radius: 10px; /* Rounded edges for the container */
-    padding: 10px;
-    gap: 5px;
-    background-color: #f5f5dc; /* A classic beige that is easy on the eyes but distinct */
-    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-}
-
-.table-row {
-    display: flex;
-    flex-flow: row nowrap;
-    align-items: center;
-    padding: 10px;
-    border: 1px solid #333;
-    gap: 10px; /* Creates space between the items inside */
-}
-
-/* * A container to group the related elements and separate them
-* from the rest of the page.
-*/
-.table-cell {
-    display: flex;
-    flex-direction: row nowrap;
-    align-items: center;
-    gap: 15px; /* Space between the label-value pairs */
-    background-color: #fff;
-    padding: 25px;
+    background-color: #e6f0f7;
     border-radius: 10px;
-    box-shadow: 0 4px 12px #ccc;
-    border: 1px solid #333;
+    padding: 20px;
+    box-shadow: inset 0 2px 8px rgba(0, 64, 112, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
-.label-cell {
-    font-size: 1.1rem;
-    align-items: end;
-    font-weight: bold;
-    color: #444; /* A soft, dark gray for the label */
-    padding-left: 5px;
-}
-
-.input-value-cell {
-    background-color: #fff; /* White background to indicate it's editable */
-    border: 1px solid #333;
-    border-radius: 6px;
-    padding: 10px 12px;
-    font-size: 1rem;
-    color: #000;
-}
-
-/* * Style for the input element (editable).
-*/
-.output-value-cell {
-    background-color: #eee; /* A light gray to indicate non-editable */
-    border: 1px solid #333;
-    border-radius: 6px;
-    padding: 10px 12px;
-    font-size: 1rem;
-    font-style: italic;
-    color: #000;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-.checkbox-cell {
-    -webkit-appearance: none;
-    appearance: none;
-    margin: 0;
-    width: 28px;
-    height: 28px;
-    border: 2px solid #333;
-    background-color: #fff;
+.table-header,
+.table-row {
     display: grid;
-    place-content: center;
+    grid-template-columns: 2fr 1fr 2fr;
+    gap: 15px;
+    align-items: center;
 }
 
-.checkbox-cell::before {
-    content: "";
-    margin: 0;
-    width: 18px;
-    height: 18px;
-    transform: scale(0); /* Invisible by default */
-    box-shadow: inset 1em 1em #007bff; /* Make the checkmark symbol blue */
-    clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%); /* Cuts the shape into a checkmark */
+.table-header label {
+    font-family: 'Cinzel Decorative', cursive;
+    font-weight: 700;
+    color: #004070;
+    padding-bottom: 5px;
+    font-size: 0.9em;
 }
 
-/* Checked state */
-.checkbox-cell:checked {
-    border-color: #007bff; /* Keep background white, just change border */
+.table-row input {
+    width: 100%;
+    box-sizing: border-box;
 }
 
-.checkbox-cell:checked::before {
-    transform: scale(1); /* Make blue checkmark visible now that it is checked */
+.content-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 5px 0;
+    flex-grow: 1;
 }
 
-/* * Style for the select (dropdown) element.
-    */
-.dropdown-value-cell {
-    background-color: #ffffff;
-    border: 1px solid #c2c8d0;
-    min-width: fit-content;
-    border-radius: 6px;
-    padding: 10px 36px 10px 12px;
-    font-size: 1rem;
-    color: #000;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
-    cursor: pointer;
-    -webkit-appearance: none; /* Removes default browser styling on WebKit */
-    appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%235a6470' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 12px center;
+.content-group label {
+    font-weight: 500;
+    color: #005a9c;
+    font-size: 0.9em;
 }
 
-/* Style for the input/select when it is focused (clicked on) */
-.input-value-cell:focus,
-.dropdown-value-cell:focus {
+input[type="text"],
+input[type="number"],
+select {
+    padding: 10px;
+    border: 1px solid #cce0f0;
+    border-radius: 8px;
+    background-color: #f8fafc;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1em;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+select:focus {
     outline: none;
     border-color: #007bff;
-    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.15);
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
 }
 
-/* --- Text area inputs --- */
-.fantasy-textarea {
-    font-family: 'Bilbo Swash Caps', cursive; /* Use the elegant, handwritten font */
-    font-size: 1.5rem; /* Larger font size for the script style */
-    line-height: 1.6; /* Ample space between lines */
-    color: #333;
-    width: 100%;
-    min-height: 200px; /* Ensures sufficient initial space */
-    padding: 15px;
-    border: 1px solid #c5b8a9;
-    border-radius: 6px;
-    background-color: #fdfaf6; /* A soft, parchment-like color */
-    resize: vertical; /* Allows user to resize vertically only */
-    box-sizing: border-box; /* Ensures padding is included in the total width/height */
+.calculated-value {
+    padding: 10px;
+    font-weight: 500;
+    color: #004070;
+    background-color: #e6f0f7;
+    border-radius: 8px;
+    text-align: center;
 }
 
-
-/* --- Proficiency bonus --- */
-.proficiency-bubble {
-    display: inline-flex; /* Aligns children (label and value) in a row */
-    flex-grow: 0;
-    width: 300px;
-    align-items: center; /* Vertically centers the children */
-    background: linear-gradient(140deg, #89f7fe 0%, #66a6ff 100%); /* A cool, vibrant blue gradient */
-    color: #1c3d5a; /* A dark, desaturated blue for readable text */
-    border-radius: 50px; /* Creates the pill/bubble shape */
-    padding: 6px 8px 6px 18px; /* Top, Right, Bottom, Left padding for spacing */
-    border: 1px solid rgba(255, 255, 255, 0.4); /* Subtle inner border for a glossy look */
-    cursor: default; /* Changes cursor to show it's not a standard button */
-}
-
-.proficiency-bubble .label {
-    font-weight: 600; /* Semi-bold for clarity */
-    font-size: 1rem;   /* Standard font size (16px) */
-    margin-right: 12px; /* Creates space between the label and the value circle */
-    letter-spacing: 0.5px; /* Adds a bit of breathing room between letters */
-}
-
-.proficiency-bubble .value {
+.proficiency-bonus-group {
     display: flex;
     align-items: center;
-    justify-content: center;
-    background-color: #ffffff; /* A solid white background for high contrast */
-    color: #0056b3; /* A strong, dark blue for the number */
-    font-weight: 700; /* Bold font weight for the value */
-    font-size: 1.1rem; /* Slightly larger font size to emphasize the number */
-    border-radius: 50%; /* Makes the element a perfect circle */
-    width: 42px;  /* Ensures a consistent circular shape */
-    height: 42px;
-    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1); /* Inner shadow for a bit of depth */
+    gap: 15px;
+    background-color: #dfeaf2;
+    border: 1px solid #b3d1e8;
+    border-radius: 10px;
+    padding: 10px 20px;
 }
 
-/* --- Buttons & Footer --- */
-.btn {
-    padding: 0.75rem 1.5rem;
+.proficiency-bonus-group label {
+    font-family: 'Cinzel Decorative', cursive;
+    font-weight: 700;
+    color: #004070;
+    font-size: 1em;
+    margin: 0;
+}
+
+.proficiency-bonus-group .calculated-value {
+    font-size: 1.2em;
+    font-weight: 700;
+    min-width: 60px;
+    background-color: #fff;
+}
+
+/* --- Button & Modal Styling --- */
+.action-button {
+    background-color: #005a9c;
+    color: white;
     border: none;
     border-radius: 8px;
-    background-color: #0000FF;
-    color: white;
-    font-size: 1rem;
-    font-weight: bold;
+    padding: 12px 20px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    font-size: 1em;
     cursor: pointer;
-    transition: background-color 0.3s;
-}
-.btn:hover {
-    background-color: #0096FF;
+    transition: background-color 0.3s, transform 0.2s;
+    margin-top: 10px;
 }
 
-.btn-red {
-    background-color: #8B0000;
-    color: white;
+.action-button:hover {
+    background-color: #004070;
+    transform: translateY(-2px);
 }
 
-.btn-red:hover {
-    background-color: #EE4B2B;
+.add-spell-button {
+    padding: 8px 12px;
+    font-size: 0.9em;
+    margin-top: 0;
 }
 
-.btn-green {
-    background-color: #008000;
-    color: white;
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
 }
 
-.btn-green:hover {
-    background-color: #AAFF00;
+.modal-overlay.visible {
+    opacity: 1;
+    visibility: visible;
 }
 
-.sheet-footer {
-    text-align: center;
-    padding: 1rem;
-}
-.sheet-footer .btn .btn-red .btn-green {
-    margin: 0 0.5rem;
-}
-
-/* --- TOOLTIP STYLES --- */
-.tooltip-icon {
-    display: inline-block;
-    width: 1rem;
-    height: 1rem;
-    border-radius: 50%;
-    background-color: #888;
-    color: white;
-    text-align: center;
-    font-size: 0.75rem;
-    line-height: 1rem;
-    margin-left: 0.5rem;
-    cursor: help;
-    font-style: italic;
-}
-
-.tooltip-popup {
-    display: none;
-    position: absolute;
-    background-color: #333;
-    color: white;
-    padding: 0.75rem;
-    border-radius: 6px;
-    max-width: 300px;
-    font-size: 0.9rem;
-    z-index: 100;
-    pointer-events: none; /* Prevents the tooltip from interfering with mouse events */
-}
-
-/* --- SPELLBOOK STYLES --- */
-#spell-list {
-    max-height: 400px;
+.modal-content {
+    background-color: #f0f4f8;
+    padding: 30px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 800px;
+    max-height: 80vh;
     overflow-y: auto;
-    padding-right: 0.5rem;
-    border-top: 2px solid #eee;
-    margin-top: 1rem;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    transform: scale(0.95);
+    transition: transform 0.3s;
 }
 
-.spell-item {
-    padding: 0.75rem;
-    border-bottom: 1px solid #ddd;
-}
-.spell-item:last-child {
-    border-bottom: none;
+.modal-overlay.visible .modal-content {
+    transform: scale(1);
 }
 
-.spell-header {
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.modal-header h2 {
+    margin: 0;
+}
+
+.close-button {
+    font-size: 2em;
+    font-weight: bold;
+    color: #555;
+    cursor: pointer;
+    border: none;
+    background: none;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.data-table th,
+.data-table td {
+    text-align: left;
+    padding: 12px;
+    border-bottom: 1px solid #dbe9f5;
+}
+
+.data-table th {
+    font-family: 'Cinzel Decorative', cursive;
+    color: #004070;
+}
+
+.data-table tr:hover {
+    background-color: #e6f0f7;
+}
+
+/* --- Spell Card Styling --- */
+.spell-level-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    position: sticky;
+    /* Make header stick to top on scroll */
+    top: -26px;
+    /* Adjust based on padding */
+    background: #ffffff;
+    padding: 10px 0;
+    z-index: 10;
+}
+
+.spell-list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.spell-card {
+    background-color: #e6f0f7;
+    border: 1px solid #cce0f0;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0, 64, 112, 0.05);
+}
+
+.spell-card-header {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    margin-bottom: 0.25rem;
+    border-bottom: 1px solid #cce0f0;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
 }
 
-.spell-header strong {
-    font-size: 1.1rem;
+.spell-card-header span {
+    font-style: italic;
+    font-size: 0.9em;
+    color: #005a9c;
 }
 
-.spell-header em {
-    font-size: 0.9rem;
-    color: #555;
+.spell-detail-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px 20px;
+    margin-bottom: 15px;
 }
 
-.spell-item em {
-    margin: 0 0 0.5rem 0;
-    font-size: 0.9rem;
-    color: #555;
+.spell-detail-item {
+    font-size: 0.9em;
 }
 
-.spell-item p {
-    margin: 0 0 0.5rem 0;
-    font-size: 0.9rem;
+.spell-detail-item strong {
+    display: block;
+    color: #005a9c;
+    font-weight: 500;
+    margin-bottom: 2px;
+}
+
+.spell-detail-item.full-width {
+    grid-column: 1 / -1;
+    /* Make item span full width */
+}
+
+.spell-description p,
+.spell-description-upgrade p {
+    margin: 0;
+    line-height: 1.5;
+}
+
+.spell-description-upgrade {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px dashed #b3d1e8;
+    font-size: 0.9em;
+}
+
+.spell-description-upgrade strong {
+    color: #004070;
 }
