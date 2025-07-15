@@ -70,52 +70,60 @@
         </div>
 
         <!-- Section 2: Abilities and Saving Throws -->
-        <div class="section-box" style="flex-grow: 4;">
-            <h2>Abilities and Saving Throws</h2>
-            <div class="proficiency-bonus-group"><label>Proficiency Bonus</label>
-                <div class="calculated-value">+2</div>
+        <div class="section-box" style="flex-grow: 4; flex-flow: column nowrap;">
+            <div class="section-row">
+                <h2>Abilities and Saving Throws</h2>
+                <div class="proficiency-bonus-group"><label for="prof-bonus">Proficiency Bonus</label>
+                    <div class="calculated-value" id="prof-bonus">+2</div>
+                </div>
             </div>
-            <div class="section-row" style="margin-top: 20px;">
+            <div class="section-row">
                 <div class="section-column" style="flex-grow:1;">
                     <h3>Abilities</h3>
-                    <div class="content-group"><label>Strength</label>
-                        <div class="calculated-value">+0</div>
+                    <div class="content-group"><label for="str-ability">Strength</label>
+                        <input type="number" id="str-ability" name="str-ability" value="10">
                     </div>
-                    <div class="content-group"><label>Dexterity</label>
-                        <div class="calculated-value">+0</div>
+                    <div class="content-group"><label for="dex-ability">Dexterity</label>
+                        <input type="number" id="dex-ability" name="dex-ability" value="10">
                     </div>
-                    <div class="content-group"><label>Constitution</label>
-                        <div class="calculated-value">+0</div>
+                    <div class="content-group"><label for="con-ability">Constitution</label>
+                        <input type="number" id="con-ability" name="con-ability" value="10">
                     </div>
-                    <div class="content-group"><label>Intelligence</label>
-                        <div class="calculated-value">+0</div>
+                    <div class="content-group"><label for="int-ability">Intelligence</label>
+                        <input type="number" id="int-ability" name="int-ability" value="10">
                     </div>
-                    <div class="content-group"><label>Wisdom</label>
-                        <div class="calculated-value">+0</div>
+                    <div class="content-group"><label for="wis-ability">Wisdom</label>
+                        <input type="number" id="wis-ability" name="wis-ability" value="10">
                     </div>
-                    <div class="content-group"><label>Charisma</label>
-                        <div class="calculated-value">+0</div>
+                    <div class="content-group"><label for="cha-ability">Charisma</label>
+                        <input type="number" id="cha-ability" name="cha-ability" value="10">
                     </div>
                 </div>
                 <div class="section-column" style="flex-grow:1;">
                     <h3>Saving Throws</h3>
-                    <div class="content-group"><label>Strength</label>
-                        <div class="calculated-value">+0</div>
+                    <div class="content-group-row"><input type="checkbox" id="str-prof">
+                        <label for="str-save">Strength</label>
+                        <div class="calculated-value" id="str-save">+0</div>
                     </div>
-                    <div class="content-group"><label>Dexterity</label>
-                        <div class="calculated-value">+0</div>
+                    <div class="content-group-row"><input type="checkbox" id="dex-prof">
+                        <label for="dex-save">Dexterity</label>
+                        <div class="calculated-value" id="dex-save">+0</div>
                     </div>
-                    <div class="content-group"><label>Constitution</label>
-                        <div class="calculated-value">+0</div>
+                    <div class="content-group-row"><input type="checkbox" id="con-prof">
+                        <label for="con-save">Constitution</label>
+                        <div class="calculated-value" id="con-save">+0</div>
                     </div>
-                    <div class="content-group"><label>Intelligence</label>
-                        <div class="calculated-value">+0</div>
+                    <div class="content-group-row"><input type="checkbox" id="int-prof">
+                        <label for="int-save">Intelligence</label>
+                        <div class="calculated-value" id="int-save">+0</div>
                     </div>
-                    <div class="content-group"><label>Wisdom</label>
-                        <div class="calculated-value">+0</div>
+                    <div class="content-group-row"><input type="checkbox" id="wis-prof">
+                        <label for="wis-save">Wisdom</label>
+                        <div class="calculated-value" id="wis-save">+0</div>
                     </div>
-                    <div class="content-group"><label>Charisma</label>
-                        <div class="calculated-value">+0</div>
+                    <div class="content-group-row"><input type="checkbox" id="cha-prof">
+                        <label for="cha-save">Charisma</label>
+                        <div class="calculated-value" id="cha-save">+0</div>
                     </div>
                 </div>
             </div>
@@ -125,62 +133,62 @@
         <div class="section-box" style="flex-grow: 4;">
             <div class="section-column" style="flex-grow: 1;">
                 <h2>Skills</h2>
-                <div class="content-group"><label>Acrobatics</label>
-                    <div class="calculated-value">+0</div>
+                <div class="content-group-row"><label for="acrobatics">Acrobatics</label>
+                    <div class="calculated-value" id="acrobatics">+0</div>
                 </div>
-                <div class="content-group"><label>Animal Handling</label>
-                    <div class="calculated-value">+0</div>
+                <div class="content-group-row"><label for="animal-handling">Animal Handling</label>
+                    <div class="calculated-value" id="animal-handling">+0</div>
                 </div>
-                <div class="content-group"><label>Arcana</label>
-                    <div class="calculated-value">+0</div>
+                <div class="content-group-row"><label for="arcana">Arcana</label>
+                    <div class="calculated-value" id="arcana">+0</div>
                 </div>
-                <div class="content-group"><label>Athletics</label>
-                    <div class="calculated-value">+0</div>
+                <div class="content-group-row"><label for="athletics">Athletics</label>
+                    <div class="calculated-value" id="athletics">+0</div>
                 </div>
-                <div class="content-group"><label>Deception</label>
-                    <div class="calculated-value">+0</div>
+                <div class="content-group-row"><label for="deception">Deception</label>
+                    <div class="calculated-value" id="deception">+0</div>
                 </div>
-                <div class="content-group"><label>History</label>
-                    <div class="calculated-value">+0</div>
+                <div class="content-group-row"><label for="history">History</label>
+                    <div class="calculated-value" id="history">+0</div>
                 </div>
-                <div class="content-group"><label>Insight</label>
-                    <div class="calculated-value">+0</div>
+                <div class="content-group-row"><label for="insight">Insight</label>
+                    <div class="calculated-value" id="insight">+0</div>
                 </div>
-                <div class="content-group"><label>Intimidation</label>
-                    <div class="calculated-value">+0</div>
+                <div class="content-group-row"><label for="intimidation">Intimidation</label>
+                    <div class="calculated-value" id="intimidation">+0</div>
                 </div>
-                <div class="content-group"><label>Investigation</label>
-                    <div class="calculated-value">+0</div>
+                <div class="content-group-row"><label for="investigation">Investigation</label>
+                    <div class="calculated-value" id="investigation">+0</div>
                 </div>
             </div>
             <div class="section-column" style="flex-grow: 1;">
                 <h2>Continued</h2>
-                <div class="content-group"><label>Medicine</label>
-                    <div class="calculated-value">+0</div>
+                <div class="content-group-row"><label for="medicine">Medicine</label>
+                    <div class="calculated-value" id="medicine">+0</div>
                 </div>
-                <div class="content-group"><label>Nature</label>
-                    <div class="calculated-value">+0</div>
+                <div class="content-group-row"><label for="nature">Nature</label>
+                    <div class="calculated-value" id="nature">+0</div>
                 </div>
-                <div class="content-group"><label>Perception</label>
-                    <div class="calculated-value">+0</div>
+                <div class="content-group-row"><label for="perception">Perception</label>
+                    <div class="calculated-value" id="perception">+0</div>
                 </div>
-                <div class="content-group"><label>Performance</label>
-                    <div class="calculated-value">+0</div>
+                <div class="content-group-row"><label for="performance">Performance</label>
+                    <div class="calculated-value" id="performance">+0</div>
                 </div>
-                <div class="content-group"><label>Persuasion</label>
-                    <div class="calculated-value">+0</div>
+                <div class="content-group-row"><label for="persuasion">Persuasion</label>
+                    <div class="calculated-value" id="persuasion">+0</div>
                 </div>
-                <div class="content-group"><label>Religion</label>
-                    <div class="calculated-value">+0</div>
+                <div class="content-group-row"><label for="religion">Religion</label>
+                    <div class="calculated-value" id="religion">+0</div>
                 </div>
-                <div class="content-group"><label>Sleight of Hand</label>
-                    <div class="calculated-value">+0</div>
+                <div class="content-group-row"><label for="sleight-of-hand">Sleight of Hand</label>
+                    <div class="calculated-value" id="sleight-of-hand">+0</div>
                 </div>
-                <div class="content-group"><label>Stealth</label>
-                    <div class="calculated-value">+0</div>
+                <div class="content-group-row"><label for="stealth">Stealth</label>
+                    <div class="calculated-value" id="stealth">+0</div>
                 </div>
-                <div class="content-group"><label>Survival</label>
-                    <div class="calculated-value">+0</div>
+                <div class="content-group-row"><label for="survival">Survival</label>
+                    <div class="calculated-value" id="survival">+0</div>
                 </div>
             </div>
         </div>
@@ -241,8 +249,8 @@
 
         <!-- Section 5: Spellcasting -->
         <div class="section-box" style="flex-grow: 6; width: 100%;">
-            <h2>Spellcasting</h2>
-            <div class="section-row">
+            <div class="section-column">
+                <h2>Spellcasting</h2>
                 <div class="content-group"><label for="spellClass">Spellcasting Class</label><select id="spellClass"
                         name="spellClass">
                         <option>Bard</option>

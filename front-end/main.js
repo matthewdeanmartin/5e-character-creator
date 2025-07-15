@@ -1,6 +1,7 @@
 // main.js
 // This is the primary script that initializes all the interactive components of the character sheet.
 
+import { initDropdownListeners, initInputListeners } from './update-outputs.js';
 import { initWeaponSelection } from './weapon-selection.js';
 import { generateSpellTables } from './spellcasting-section.js';
 import { batchFetchDetailsFromApi, fetchIndicesFromUrl } from './srd-api/fetch_from_url.js';
@@ -55,6 +56,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     
     // Initialize the weapon selection modal functionality.
     initWeaponSelection();
+
+    // Initialize ability input listeners
+    initDropdownListeners();
+    // Initialize ability input listeners
+    initInputListeners();
 
     // Generate the spellcasting tables and set up their interactive elements.
     await generateSpellTables();

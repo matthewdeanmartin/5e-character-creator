@@ -56,34 +56,37 @@ textarea.long-form-text {
     padding: 25px;
     box-shadow: 0 4px 12px rgba(0, 90, 156, 0.08);
     border: 1px solid #dbe9f5;
-    min-width: 500px;
-    flex-basis: 0;
     box-sizing: border-box;
     /* Properties for Compactness & Scrolling --- */
     display: flex;
+    min-height: 25vw;
     max-height: 70vh;
     /* Add a vertical scrollbar if content overflows */
     overflow-y: auto;
-    /* Use flexbox to manage internal layout */
-    flex-flow: column wrap;
+    min-width: 20vw;
+    max-width: 100vw;
+    /* Add a horizontal scrollbar if content overflows */
+    overflow-x: auto;
     /* Stack children (like h2 and content) vertically */
+    flex-flow: column wrap;
 }
 
 .section-row {
     display: flex;
+    min-width: 10vw;
     max-width: 25vw;
     flex-flow: row nowrap;
     /* Add a horizontal scrollbar if content overflows */
     overflow-x: auto;
-    gap: 20px;
+    padding: 10px;
     align-items: flex-end;
 }
 
 .section-column {
     display: flex;
     flex-flow: column wrap;
-    min-width: 125px;
-    gap: 15px;
+    min-width: 10vw;
+    padding: 10px;
 }
 
 .table {
@@ -100,7 +103,7 @@ textarea.long-form-text {
 .table-row {
     display: grid;
     grid-template-columns: 2fr 1fr 2fr;
-    gap: 15px;
+    gap: 20px;
     align-items: center;
 }
 
@@ -119,13 +122,22 @@ textarea.long-form-text {
 
 .content-group {
     display: flex;
-    flex-direction: column;
-    gap: 8px;
-    padding: 5px 0;
+    flex-flow: column;
+    gap: 20px;
+    padding: 10px;
     flex-grow: 1;
 }
 
-.content-group label {
+.content-group-row {
+    display: flex;
+    flex-flow: row;
+    gap: 20px;
+    padding: 10px;
+    flex-grow: 1;
+}
+
+.content-group label
+.content-group-row label {
     font-weight: 500;
     color: #005a9c;
     font-size: 0.9em;
@@ -140,7 +152,7 @@ select {
     background-color: #f8fafc;
     font-family: 'Roboto', sans-serif;
     font-size: 1em;
-    width: 100%;
+    min-width: 5vw;
     box-sizing: border-box;
     transition: border-color 0.3s, box-shadow 0.3s;
 }
@@ -160,6 +172,7 @@ select:focus {
     background-color: #e6f0f7;
     border-radius: 8px;
     text-align: center;
+    min-width: 5vw;
 }
 
 .proficiency-bonus-group {
@@ -311,6 +324,7 @@ select:focus {
 .spell-list-container {
     display: flex;
     flex-direction: column;
+    padding: 15px;
     gap: 15px;
 }
 
