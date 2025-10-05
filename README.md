@@ -1,43 +1,40 @@
-# 5th Edition Character Creator Served on HTTP Webpage
+# Tabletop RPG Character Creator
 
-## How-To
+This project is a web-based character creator for tabletop roleplaying games. The core business logic is written in Go and compiled to WebAssembly (Wasm) to run directly in the browser. The user interface is a simple HTML and JavaScript shell.
 
-1. Install `npm` (for `front-end`), `python` (for `srd-processor`), and `go` (for `back-end`)
-2. Install JS dependencies through `npm` by running `npm run setup`
-3. Start the HTTP server on `localhost` by running `npm run start`
-4. Navigate through your browser of choice to: http://127.0.0.1:8080/character-sheet.html
-    * When you start the HTTP server, you will see a print-out similar to the following:
-    ```
-    $ npm run start
+This project uses Docker to create a consistent development and deployment environment, ensuring that it builds and runs the same way for all contributors.
 
-    > character-creator-5e@1.0.0 start
-    > http-server -c-1
+## Prerequisities
 
-    Starting up http-server, serving ./
-    
-    [...]
+You must have the following software installed on your machine:
+- Docker Desktop (for Windows) or Docker Engine (for Linux)
 
-    Available on:
-    http://192.168.1.18:8080
-    http://10.147.17.218:8080
-    http://127.0.0.1:8080
-    Hit CTRL-C to stop the server
-    ```
-    If the URL given in step #4 does not work, find `character-sheet.html` at one of the URLs in that print-out.
+## Development Workflow 
 
-## Front End
-The `front-end` directory contains a JS web application which is accessible over `localhost` one you start the HTTP server. This is where the UI for our 5th edition character creator exists.
+All development should be done inside the development container. This container has the correct version of Go and all necessary tools pre-installed. The helper script `scripts/enterDevContainer.ps1` (for Windows PowerShell) will manage this process for you.
+- NOTE: You may need to set your execution policy if you haven't already: `Set-ExecutionPolicy RemoteSigned -Scope CurrentUser` 
 
-## Back End
-The `back-end` directory contains a Go library which is accessed natively by the JS web application over `WebAssembly`. In other words, our Go library is built as `WebAssembly` module and its exported functions are loaded directly into our JS web application. These functions allow us to perform more complex operations that would be either more cumbersome or less efficient to implement in JS.
+Your project files are mounted directly into the container, so any changes you make with your local editor will be immediately reflected inside the container, and vice-versa.
 
-## SRD Processor
+The first time you run this, it will build the `char-creator-dev` Docker image which will automatically start up a container. On subsequent runs, it should use the already-running container. You will now be inside a shell within the container, at the /app directory and capable of running build scripts.
 
-> [!IMPORTANT]
-> This module is not used in our actual web application, due to errors inherit to our best-ability to extract spell blocks from the SRD PDF.
+### Initial Setup
 
-The `srd-processor` directory contains a Python script which attempts to parse out the actual spell definitions from the SRD v5.2.1 (available for download [here](https://www.dndbeyond.com/srd) in PDF format)
+The first time you enter the development container, you will need to fetch the Go Wasm JavaScript helper files. The helper script `scripts/fetchGoWasm.ps1` will manage this process for you.
 
-This script struggles to correctly parse >10% of the spells found in the SRD. While >75% of the spells are parsed as expected into a very clean JSON format mirroring what is printed in the SRD's PDF, the errors make it difficult to rely on that output spell list.
+### Build the Wasm Module
 
-For this reason, we have opted to use the [D&D 5th Edition SRD API](https://5e-bits.github.io/docs/). This API exposes the entirety of D&D 5th Edition's SRD Ruleset (though it does not include additional content found in other freely-available publications made by Wizards of the Coast) directly in JSON format, which is particularly convenient for our JS web application to fetch and display.
+Whenever you make changes to `.go` source files, you need to recompile the WebAssembly module. The helper script `scripts/buildGo.sh` will do this for you.
+
+## Run the Application for Testing
+
+To see your changes in action, you need to build and run the deployment container. This container runs a lightweight web server to serve your `index.html`, `main.wasm`, and JavaScript files.
+
+From your local machine's terminal (not inside the dev container), run the PowerShell deployment script `scripts/runDeployContainer.ps1` (for Windows PowerShell).
+
+This script will:
+1. Build a deployment image from `Dockerfile.deploy`.
+2. Stop and remove any old version of the application container.
+3. Start a new container in the background.
+
+Once it's running, you can view the application by navigating to `http://localhost:8000` in your web browser.

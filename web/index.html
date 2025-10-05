@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Character Creator</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: white;
+            color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            text-align: center;
+        }
+        .button {
+            background-color: cyan;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+        .invisible {
+            display: none; /* invisible by default */
+        }
+        .visible {
+            display: flex; /* visible when active */
+        }
+    </style>
+</head>
+<body>
+
+    <div id="mainModal" class="container visible">
+        <h1>Wasm Character Creator</h1>
+        <button id="createCharacterBtn">Create New Character</button>
+    </div>
+
+    <div id="creationModal" class="invisible">
+        <div>
+            <h2>Initial Character Setup</h2>
+            <div>
+                <label for="charName">Character Name</label>
+                <input type="text" id="charName" placeholder="e.g., Eldrin">
+            </div>
+            <div>
+                <label for="charRace">Race</label>
+                <select id="charRace"></select>
+            </div>
+            <div>
+                <label for="charClass">Class</label>
+                <select id="charClass"></select>
+            </div>
+            <div>
+                <label for="charBackground">Background</label>
+                <select id="charBackground"></select>
+            </div>
+            <div>
+                <button id="cancelBtn" class="button">Cancel</button>
+                <button id="saveBtn" class="button">Save Character</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Wasm Setup Scripts -->
+    <script src="wasm_exec.js"></script>
+    <script src="main.js"></script>
+
+</body>
+</html>
