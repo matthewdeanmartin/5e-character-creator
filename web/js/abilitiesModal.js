@@ -31,7 +31,7 @@ function syncPointPool() {
     const abilityInputs = document.querySelectorAll('.ability-input');
     
     abilityInputs.forEach(input => {
-        const score = parseInt(input.value, 8);
+        const score = parseInt(input.value, 10);
         // Use the Go function to get the *total* cost for this score
         totalCost += api.getPointBuyCost(score); 
     });
@@ -132,18 +132,30 @@ export function initStep2(apiObject) {
         return;
     }
 
+    // 1. Check if abilityScores object exists. If not, create it.
+    if (!api.currentCharacter.abilityScores) {
+        console.warn("Character data missing 'abilityScores', initializing to defaults.");
+        api.currentCharacter.abilityScores = {
+            str: 8, dex: 8, con: 8,
+            int: 8, wis: 8, cha: 8,
+        };
+    }
+    
     const abilityInputs = document.querySelectorAll('.ability-input');
+    const abilityButtons = document.querySelectorAll('.ability-btn');
 
-    // 1. Populate fields from saved data
-    // BUT ensure they are within the point-buy bounds (8-18)
+    // 2. Populate fields from saved data
     abilityInputs.forEach(input => {
         const ability = input.dataset.ability;
         let score = api.currentCharacter.abilityScores[ability];
 
-        // Force scores into the valid point-buy range.
-        // This handles loading old characters or bad data.
-        if (score < MIN_SCORE) score = MIN_SCORE;
-        if (score > MAX_SCORE) score = MAX_SCORE;
+        // 2a. Check if the *specific* score is missing or invalid.
+        if (score === undefined || score === null || isNaN(parseInt(score, 10))) {
+            score = MIN_SCORE; // Default to 8
+        }
+
+        // 2b. Force scores into the valid point-buy range [8, 18].
+        score = Math.max(MIN_SCORE, Math.min(MAX_SCORE, score));
         
         input.value = score;
         api.currentCharacter.abilityScores[ability] = score; // Sync state
