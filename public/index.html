@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-stone-100">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D&D Character Creator</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Using Inter font as default */
+        body { font-family: "Inter", sans-serif; }
+        /* Custom style for disabled footer buttons */
+        .footer-btn:disabled {
+            background-color: #d4d4d8; /* zinc-300 */
+            color: #71717a; /* zinc-500 */
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body class="h-full flex flex-col">
+
+    <!-- 
+      HEADER / CHARACTER SUMMARY BANNER
+      This is the persistent banner at the top.
+    -->
+    <header class="bg-amber-800 text-white shadow-md p-3">
+        <h1 class="text-xl font-bold text-amber-100 mb-2">D&D 5th Edition Character Creator</h1>
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-x-4 gap-y-2 text-sm">
+            <div>
+                <span class="font-semibold text-amber-200 block">Player:</span>
+                <span id="summary-player">N/A</span>
+            </div>
+            <div>
+                <span class="font-semibold text-amber-200 block">Character:</span>
+                <span id="summary-name">N/A</span>
+            </div>
+            <div>
+                <span class="font-semibold text-amber-200 block">Race:</span>
+                <span id="summary-race">N/A</span>
+            </div>
+            <div>
+                <span class="font-semibold text-amber-200 block">Sub-Race:</span>
+                <span id="summary-subrace">N/A</span>
+            </div>
+            <div>
+                <span class="font-semibold text-amber-200 block">Class:</span>
+                <span id="summary-class">N/A</span>
+            </div>
+            <div>
+                <span class="font-semibold text-amber-200 block">Last Updated:</span>
+                <span id="summary-updated">--:--:--</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- 
+      MAIN CONTENT AREA
+      The content from the /pages/ folder will be loaded here.
+    -->
+    <main id="content-container" class="flex-grow p-6 md:p-10">
+        <!-- 
+          LANDING PAGE CONTENT (Stage 0)
+          This is the initial content before a page is loaded.
+        -->
+        <div id="page-0-content" class="text-center max-w-lg mx-auto">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6">Welcome, Adventurer!</h2>
+            <p class="text-lg text-stone-600 mb-10">
+                Begin your journey by creating a new hero or loading a previous one.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button id="btn-create" class="bg-amber-600 text-white font-bold py-3 px-6 rounded-lg shadow hover:bg-amber-700 transition-colors text-lg">
+                    Create New Character
+                </button>
+                <button id="btn-load" class="bg-stone-600 text-white font-bold py-3 px-6 rounded-lg shadow hover:bg-stone-700 transition-colors text-lg">
+                    Load Character
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- 
+      FOOTER / NAVIGATION
+      This is the persistent navigation bar at the bottom.
+    -->
+    <footer class="bg-white border-t border-stone-300 p-4 sticky bottom-0 shadow-inner">
+        <div class="flex justify-between max-w-5xl mx-auto">
+            <button id="btn-prev" class="footer-btn bg-stone-500 text-white font-semibold py-2 px-6 rounded-lg transition-colors hover:bg-stone-600">
+                Previous
+            </button>
+            <button id="btn-restart" class="footer-btn bg-red-600 text-white font-semibold py-2 px-6 rounded-lg transition-colors hover:bg-red-700">
+                Restart
+            </button>
+            <button id="btn-next" class="footer-btn bg-blue-600 text-white font-semibold py-2 px-6 rounded-lg transition-colors hover:bg-blue-700">
+                Next
+            </button>
+        </div>
+    </footer>
+
+    <!-- Import JS -->
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>

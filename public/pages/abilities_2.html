@@ -1,0 +1,162 @@
+<div class="max-w-4xl mx-auto">
+    <h2 class="text-2xl font-bold text-stone-800 mb-6">Step 2: Ability Scores</h2>
+    <div class="bg-white p-6 rounded-lg shadow-md">
+        <p class="text-stone-700 mb-6">
+            Enter your base ability scores. Racial bonuses from your selections on Step 1 are locked in, but you can add any additional miscellaneous modifiers below.
+        </p>
+        
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            
+            <div class="p-4 bg-stone-50 border border-stone-200 rounded-md flex flex-col items-center shadow-sm">
+                <span class="font-bold text-stone-700 mb-3">Strength (STR)</span>
+                <div class="flex items-end space-x-2 w-full justify-center text-sm pb-1">
+                    <div class="flex flex-col items-center">
+                        <label for="base-str" class="text-xs text-stone-500 mb-1">Base</label>
+                        <input type="number" id="base-str" class="w-14 px-1 py-1 text-center border border-stone-300 rounded-md focus:ring-amber-500" value="8">
+                    </div>
+                    <span class="font-bold text-stone-400 mb-1">+</span>
+                    <div class="flex flex-col items-center">
+                        <label class="text-xs text-stone-500 mb-1">Racial</label>
+                        <span id="racial-str" class="w-14 px-1 py-1 text-center border border-stone-300 bg-stone-200 text-stone-500 rounded-md cursor-not-allowed font-semibold block">0</span>
+                    </div>
+                    <span class="font-bold text-stone-400 mb-1">+</span>
+                    <div class="flex flex-col items-center">
+                        <label for="user-str" class="text-xs text-stone-500 mb-1">Misc</label>
+                        <input type="number" id="user-str" class="w-14 px-1 py-1 text-center border border-stone-300 rounded-md focus:ring-amber-500" value="0">
+                    </div>
+                    <span class="font-bold text-stone-400 mb-1">=</span>
+                    <div class="flex flex-col items-center">
+                        <label class="text-xs text-stone-500 mb-1">Total</label>
+                        <span id="total-str" class="text-2xl font-bold text-amber-600 w-12 text-center block leading-none">8</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-4 bg-stone-50 border border-stone-200 rounded-md flex flex-col items-center shadow-sm">
+                <span class="font-bold text-stone-700 mb-3">Dexterity (DEX)</span>
+                <div class="flex items-end space-x-2 w-full justify-center text-sm pb-1">
+                    <div class="flex flex-col items-center">
+                        <label for="base-dex" class="text-xs text-stone-500 mb-1">Base</label>
+                        <input type="number" id="base-dex" class="w-14 px-1 py-1 text-center border border-stone-300 rounded-md focus:ring-amber-500" value="8">
+                    </div>
+                    <span class="font-bold text-stone-400 mb-1">+</span>
+                    <div class="flex flex-col items-center">
+                        <label class="text-xs text-stone-500 mb-1">Racial</label>
+                        <span id="racial-dex" class="w-14 px-1 py-1 text-center border border-stone-300 bg-stone-200 text-stone-500 rounded-md cursor-not-allowed font-semibold block">0</span>
+                    </div>
+                    <span class="font-bold text-stone-400 mb-1">+</span>
+                    <div class="flex flex-col items-center">
+                        <label for="user-dex" class="text-xs text-stone-500 mb-1">Misc</label>
+                        <input type="number" id="user-dex" class="w-14 px-1 py-1 text-center border border-stone-300 rounded-md focus:ring-amber-500" value="0">
+                    </div>
+                    <span class="font-bold text-stone-400 mb-1">=</span>
+                    <div class="flex flex-col items-center">
+                        <label class="text-xs text-stone-500 mb-1">Total</label>
+                        <span id="total-dex" class="text-2xl font-bold text-amber-600 w-12 text-center block leading-none">8</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-4 bg-stone-50 border border-stone-200 rounded-md flex flex-col items-center shadow-sm">
+                <span class="font-bold text-stone-700 mb-3">Constitution (CON)</span>
+                <div class="flex items-end space-x-2 w-full justify-center text-sm pb-1">
+                    <div class="flex flex-col items-center">
+                        <label for="base-con" class="text-xs text-stone-500 mb-1">Base</label>
+                        <input type="number" id="base-con" class="w-14 px-1 py-1 text-center border border-stone-300 rounded-md focus:ring-amber-500" value="8">
+                    </div>
+                    <span class="font-bold text-stone-400 mb-1">+</span>
+                    <div class="flex flex-col items-center">
+                        <label class="text-xs text-stone-500 mb-1">Racial</label>
+                        <span id="racial-con" class="w-14 px-1 py-1 text-center border border-stone-300 bg-stone-200 text-stone-500 rounded-md cursor-not-allowed font-semibold block">0</span>
+                    </div>
+                    <span class="font-bold text-stone-400 mb-1">+</span>
+                    <div class="flex flex-col items-center">
+                        <label for="user-con" class="text-xs text-stone-500 mb-1">Misc</label>
+                        <input type="number" id="user-con" class="w-14 px-1 py-1 text-center border border-stone-300 rounded-md focus:ring-amber-500" value="0">
+                    </div>
+                    <span class="font-bold text-stone-400 mb-1">=</span>
+                    <div class="flex flex-col items-center">
+                        <label class="text-xs text-stone-500 mb-1">Total</label>
+                        <span id="total-con" class="text-2xl font-bold text-amber-600 w-12 text-center block leading-none">8</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-4 bg-stone-50 border border-stone-200 rounded-md flex flex-col items-center shadow-sm">
+                <span class="font-bold text-stone-700 mb-3">Intelligence (INT)</span>
+                <div class="flex items-end space-x-2 w-full justify-center text-sm pb-1">
+                    <div class="flex flex-col items-center">
+                        <label for="base-int" class="text-xs text-stone-500 mb-1">Base</label>
+                        <input type="number" id="base-int" class="w-14 px-1 py-1 text-center border border-stone-300 rounded-md focus:ring-amber-500" value="8">
+                    </div>
+                    <span class="font-bold text-stone-400 mb-1">+</span>
+                    <div class="flex flex-col items-center">
+                        <label class="text-xs text-stone-500 mb-1">Racial</label>
+                        <span id="racial-int" class="w-14 px-1 py-1 text-center border border-stone-300 bg-stone-200 text-stone-500 rounded-md cursor-not-allowed font-semibold block">0</span>
+                    </div>
+                    <span class="font-bold text-stone-400 mb-1">+</span>
+                    <div class="flex flex-col items-center">
+                        <label for="user-int" class="text-xs text-stone-500 mb-1">Misc</label>
+                        <input type="number" id="user-int" class="w-14 px-1 py-1 text-center border border-stone-300 rounded-md focus:ring-amber-500" value="0">
+                    </div>
+                    <span class="font-bold text-stone-400 mb-1">=</span>
+                    <div class="flex flex-col items-center">
+                        <label class="text-xs text-stone-500 mb-1">Total</label>
+                        <span id="total-int" class="text-2xl font-bold text-amber-600 w-12 text-center block leading-none">8</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-4 bg-stone-50 border border-stone-200 rounded-md flex flex-col items-center shadow-sm">
+                <span class="font-bold text-stone-700 mb-3">Wisdom (WIS)</span>
+                <div class="flex items-end space-x-2 w-full justify-center text-sm pb-1">
+                    <div class="flex flex-col items-center">
+                        <label for="base-wis" class="text-xs text-stone-500 mb-1">Base</label>
+                        <input type="number" id="base-wis" class="w-14 px-1 py-1 text-center border border-stone-300 rounded-md focus:ring-amber-500" value="8">
+                    </div>
+                    <span class="font-bold text-stone-400 mb-1">+</span>
+                    <div class="flex flex-col items-center">
+                        <label class="text-xs text-stone-500 mb-1">Racial</label>
+                        <span id="racial-wis" class="w-14 px-1 py-1 text-center border border-stone-300 bg-stone-200 text-stone-500 rounded-md cursor-not-allowed font-semibold block">0</span>
+                    </div>
+                    <span class="font-bold text-stone-400 mb-1">+</span>
+                    <div class="flex flex-col items-center">
+                        <label for="user-wis" class="text-xs text-stone-500 mb-1">Misc</label>
+                        <input type="number" id="user-wis" class="w-14 px-1 py-1 text-center border border-stone-300 rounded-md focus:ring-amber-500" value="0">
+                    </div>
+                    <span class="font-bold text-stone-400 mb-1">=</span>
+                    <div class="flex flex-col items-center">
+                        <label class="text-xs text-stone-500 mb-1">Total</label>
+                        <span id="total-wis" class="text-2xl font-bold text-amber-600 w-12 text-center block leading-none">8</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-4 bg-stone-50 border border-stone-200 rounded-md flex flex-col items-center shadow-sm">
+                <span class="font-bold text-stone-700 mb-3">Charisma (CHA)</span>
+                <div class="flex items-end space-x-2 w-full justify-center text-sm pb-1">
+                    <div class="flex flex-col items-center">
+                        <label for="base-cha" class="text-xs text-stone-500 mb-1">Base</label>
+                        <input type="number" id="base-cha" class="w-14 px-1 py-1 text-center border border-stone-300 rounded-md focus:ring-amber-500" value="8">
+                    </div>
+                    <span class="font-bold text-stone-400 mb-1">+</span>
+                    <div class="flex flex-col items-center">
+                        <label class="text-xs text-stone-500 mb-1">Racial</label>
+                        <span id="racial-cha" class="w-14 px-1 py-1 text-center border border-stone-300 bg-stone-200 text-stone-500 rounded-md cursor-not-allowed font-semibold block">0</span>
+                    </div>
+                    <span class="font-bold text-stone-400 mb-1">+</span>
+                    <div class="flex flex-col items-center">
+                        <label for="user-cha" class="text-xs text-stone-500 mb-1">Misc</label>
+                        <input type="number" id="user-cha" class="w-14 px-1 py-1 text-center border border-stone-300 rounded-md focus:ring-amber-500" value="0">
+                    </div>
+                    <span class="font-bold text-stone-400 mb-1">=</span>
+                    <div class="flex flex-col items-center">
+                        <label class="text-xs text-stone-500 mb-1">Total</label>
+                        <span id="total-cha" class="text-2xl font-bold text-amber-600 w-12 text-center block leading-none">8</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

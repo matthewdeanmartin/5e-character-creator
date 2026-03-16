@@ -1,0 +1,109 @@
+/* General Body Styles */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    background-color: #f0f2f5;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Main Page Container */
+.container {
+    text-align: center;
+}
+
+/* Button Styles */
+.button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1em;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.button:hover {
+    background-color: #0056b3;
+}
+.button:disabled {
+    background-color: #a0c3e6;
+    cursor: not-allowed;
+}
+.cancel-btn {
+    background-color: #6c757d;
+}
+.cancel-btn:hover {
+    background-color: #5a6268;
+}
+
+/* Modal Styles */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: none; /* Initially hidden */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-overlay.is-visible {
+    display: flex;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 600px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+}
+
+/* Creator Layout Styles */
+.creator-header {
+    display: flex;
+    justify-content: space-around;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #e0e0e0;
+}
+.header-item {
+    font-size: 0.9em;
+    color: #555;
+}
+.creator-body {
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 25px;
+    margin-bottom: 25px;
+    background-color: #f8f9fa;
+}
+.creator-step h2 {
+    margin-top: 0;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.creator-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.navigation-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+/* Visibility Utility Class */
+.hidden {
+    display: none;
+}

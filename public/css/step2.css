@@ -1,0 +1,134 @@
+/* Ability Scores Styles (for Step 2) */
+.ability-scores-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+/* New Header Row Style */
+.ability-header-row {
+    font-weight: bold;
+    color: #555;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+}
+.ability-label-col {
+    text-align: center;
+}
+/* End New Header Row Style */
+
+.ability-score-row {
+    display: grid;
+    /* Updated Grid: Label, Base(Input), Buttons, Bonus, Final, Mod */
+    grid-template-columns: 1fr 65px 85px 45px 45px 45px;
+    align-items: center;
+    gap: 15px;
+}
+.ability-label {
+    font-weight: bold;
+    text-align: left;
+}
+.ability-input {
+    width: 100%;
+    padding: 10px;
+    font-size: 1.1em;
+    text-align: center;
+    background-color: #fdfdfd;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+.ability-input:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}
+.ability-input::-webkit-outer-spin-button,
+.ability-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* New Styles for Bonus and Final */
+.ability-bonus, .ability-final-score {
+    font-size: 1.1em;
+    text-align: center;
+    padding: 10px 0;
+    border-radius: 8px;
+    width: 100%;
+}
+.ability-bonus {
+    background-color: #e6f7ff; /* Light blue */
+    color: #0056b3;
+    font-weight: bold;
+}
+.ability-final-score {
+    background-color: #e9ecef;
+    font-weight: bold;
+}
+/* End New Styles */
+
+.ability-modifier {
+    font-size: 1.1em;
+    font-weight: bold;
+    text-align: center;
+    background-color: #e9ecef;
+    padding: 10px 0;
+    border-radius: 8px;
+    width: 100%;
+}
+
+/* Point Buy Pool Display */
+.point-buy-pool {
+    text-align: center;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+.point-buy-pool h3 {
+    margin: 0 0 5px 0;
+    color: #333;
+}
+.points-pool-value {
+    font-size: 2.5em;
+    font-weight: bold;
+    color: #007bff;
+}
+
+/* Ability Controls */
+.ability-controls {
+    display: flex;
+    gap: 5px;
+}
+.ability-btn {
+    width: 35px;
+    height: 35px;
+    font-size: 1.2em;
+    font-weight: bold;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #f0f0f0;
+    line-height: 1;
+}
+.ability-btn:hover {
+    background-color: #e0e0e0;
+}
+.ability-btn[data-action="increase"] {
+    color: #28a745;
+    border-color: #28a745;
+}
+.ability-btn[data-action="decrease"] {
+    color: #dc3545;
+    border-color: #dc3545;
+}
+.ability-btn:disabled {
+    background-color: #f8f8f8;
+    color: #ccc;
+    border-color: #eee;
+    cursor: not-allowed;
+}
