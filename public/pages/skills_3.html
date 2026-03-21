@@ -2,35 +2,190 @@
   Page 3: Skills
   This content is loaded into the <main> element of index.html
 -->
-<div class="max-w-2xl mx-auto">
-    <h2 class="text-2xl font-bold text-stone-800 mb-6">Step 3: Skills</h2>
+<div class="max-w-4xl mx-auto">
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-6 gap-4">
+        <h2 class="text-2xl font-bold text-stone-800">Step 3: Skills</h2>
+        <div class="flex space-x-3">
+            <div id="choices-remaining-container" class="bg-stone-100 border border-stone-300 px-4 py-2 rounded-lg text-stone-700 shadow-sm transition-colors duration-300">
+                <span class="text-sm font-semibold uppercase tracking-wider mr-2">Choices Remaining:</span>
+                <span id="choices-remaining-display" class="text-xl font-bold">0</span>
+            </div>
+            <div class="bg-amber-100 border border-amber-300 px-4 py-2 rounded-lg text-amber-900 shadow-sm">
+                <span class="text-sm font-semibold uppercase tracking-wider mr-2">Proficiency Bonus:</span>
+                <span id="prof-bonus-display" class="text-xl font-bold">+2</span>
+            </div>
+        </div>
+    </div>
+
     <div class="bg-white p-6 rounded-lg shadow-md">
-        <p class="text-stone-700">
-            Skill selection logic will go here.
-            <br><br>
-            This page will show available skills, which ones you get from your
-            class and background, and allow you to pick your proficiencies.
+        <p class="text-stone-700 mb-6">
+            Select the skills your character is proficient in based on your Class and Background. 
+            The totals are automatically calculated using your Ability Modifiers and Proficiency Bonus.
         </p>
 
-        <!-- Placeholder for skills list -->
-        <div class="mt-6 space-y-2">
-            <div class="flex items-center">
-                <input type="checkbox" id="skill-acrobatics" class="h-4 w-4 text-amber-600 border-stone-300 rounded focus:ring-amber-500">
-                <label for="skill-acrobatics" class="ml-2 block text-sm text-stone-900">Acrobatics (DEX)</label>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-3" id="skills-container">
+            <div class="flex items-center justify-between p-2 hover:bg-stone-50 rounded-md border-b border-stone-100">
+                <div class="flex items-center">
+                    <input type="checkbox" id="skill-acrobatics" class="h-4 w-4 text-amber-600 border-stone-300 rounded focus:ring-amber-500 cursor-pointer">
+                    <label for="skill-acrobatics" class="ml-3 block text-sm font-medium text-stone-900 cursor-pointer">Acrobatics</label>
+                    <span class="ml-2 text-xs text-stone-500 font-mono">(DEX)</span>
+                </div>
+                <div class="text-lg font-bold text-stone-700 w-8 text-right" id="total-acrobatics">+0</div>
             </div>
-            <div class="flex items-center">
-                <input type="checkbox" id="skill-animal-handling" class="h-4 w-4 text-amber-600 border-stone-300 rounded focus:ring-amber-500">
-                <label for="skill-animal-handling" class="ml-2 block text-sm text-stone-900">Animal Handling (WIS)</label>
+
+            <div class="flex items-center justify-between p-2 hover:bg-stone-50 rounded-md border-b border-stone-100">
+                <div class="flex items-center">
+                    <input type="checkbox" id="skill-animal-handling" class="h-4 w-4 text-amber-600 border-stone-300 rounded focus:ring-amber-500 cursor-pointer">
+                    <label for="skill-animal-handling" class="ml-3 block text-sm font-medium text-stone-900 cursor-pointer">Animal Handling</label>
+                    <span class="ml-2 text-xs text-stone-500 font-mono">(WIS)</span>
+                </div>
+                <div class="text-lg font-bold text-stone-700 w-8 text-right" id="total-animal-handling">+0</div>
             </div>
-            <div class="flex items-center">
-                <input type="checkbox" id="skill-arcana" class="h-4 w-4 text-amber-600 border-stone-300 rounded focus:ring-amber-500">
-                <label for="skill-arcana" class="ml-2 block text-sm text-stone-900">Arcana (INT)</label>
+
+            <div class="flex items-center justify-between p-2 hover:bg-stone-50 rounded-md border-b border-stone-100">
+                <div class="flex items-center">
+                    <input type="checkbox" id="skill-arcana" class="h-4 w-4 text-amber-600 border-stone-300 rounded focus:ring-amber-500 cursor-pointer">
+                    <label for="skill-arcana" class="ml-3 block text-sm font-medium text-stone-900 cursor-pointer">Arcana</label>
+                    <span class="ml-2 text-xs text-stone-500 font-mono">(INT)</span>
+                </div>
+                <div class="text-lg font-bold text-stone-700 w-8 text-right" id="total-arcana">+0</div>
             </div>
-             <div class="flex items-center">
-                <input type="checkbox" id="skill-athletics" class="h-4 w-4 text-amber-600 border-stone-300 rounded focus:ring-amber-500">
-                <label for="skill-athletics" class="ml-2 block text-sm text-stone-900">Athletics (STR)</label>
+
+            <div class="flex items-center justify-between p-2 hover:bg-stone-50 rounded-md border-b border-stone-100">
+                <div class="flex items-center">
+                    <input type="checkbox" id="skill-athletics" class="h-4 w-4 text-amber-600 border-stone-300 rounded focus:ring-amber-500 cursor-pointer">
+                    <label for="skill-athletics" class="ml-3 block text-sm font-medium text-stone-900 cursor-pointer">Athletics</label>
+                    <span class="ml-2 text-xs text-stone-500 font-mono">(STR)</span>
+                </div>
+                <div class="text-lg font-bold text-stone-700 w-8 text-right" id="total-athletics">+0</div>
             </div>
-            <p class="text-stone-500 text-sm italic">...and so on.</p>
+
+            <div class="flex items-center justify-between p-2 hover:bg-stone-50 rounded-md border-b border-stone-100">
+                <div class="flex items-center">
+                    <input type="checkbox" id="skill-deception" class="h-4 w-4 text-amber-600 border-stone-300 rounded focus:ring-amber-500 cursor-pointer">
+                    <label for="skill-deception" class="ml-3 block text-sm font-medium text-stone-900 cursor-pointer">Deception</label>
+                    <span class="ml-2 text-xs text-stone-500 font-mono">(CHA)</span>
+                </div>
+                <div class="text-lg font-bold text-stone-700 w-8 text-right" id="total-deception">+0</div>
+            </div>
+
+            <div class="flex items-center justify-between p-2 hover:bg-stone-50 rounded-md border-b border-stone-100">
+                <div class="flex items-center">
+                    <input type="checkbox" id="skill-history" class="h-4 w-4 text-amber-600 border-stone-300 rounded focus:ring-amber-500 cursor-pointer">
+                    <label for="skill-history" class="ml-3 block text-sm font-medium text-stone-900 cursor-pointer">History</label>
+                    <span class="ml-2 text-xs text-stone-500 font-mono">(INT)</span>
+                </div>
+                <div class="text-lg font-bold text-stone-700 w-8 text-right" id="total-history">+0</div>
+            </div>
+
+            <div class="flex items-center justify-between p-2 hover:bg-stone-50 rounded-md border-b border-stone-100">
+                <div class="flex items-center">
+                    <input type="checkbox" id="skill-insight" class="h-4 w-4 text-amber-600 border-stone-300 rounded focus:ring-amber-500 cursor-pointer">
+                    <label for="skill-insight" class="ml-3 block text-sm font-medium text-stone-900 cursor-pointer">Insight</label>
+                    <span class="ml-2 text-xs text-stone-500 font-mono">(WIS)</span>
+                </div>
+                <div class="text-lg font-bold text-stone-700 w-8 text-right" id="total-insight">+0</div>
+            </div>
+
+            <div class="flex items-center justify-between p-2 hover:bg-stone-50 rounded-md border-b border-stone-100">
+                <div class="flex items-center">
+                    <input type="checkbox" id="skill-intimidation" class="h-4 w-4 text-amber-600 border-stone-300 rounded focus:ring-amber-500 cursor-pointer">
+                    <label for="skill-intimidation" class="ml-3 block text-sm font-medium text-stone-900 cursor-pointer">Intimidation</label>
+                    <span class="ml-2 text-xs text-stone-500 font-mono">(CHA)</span>
+                </div>
+                <div class="text-lg font-bold text-stone-700 w-8 text-right" id="total-intimidation">+0</div>
+            </div>
+
+            <div class="flex items-center justify-between p-2 hover:bg-stone-50 rounded-md border-b border-stone-100">
+                <div class="flex items-center">
+                    <input type="checkbox" id="skill-investigation" class="h-4 w-4 text-amber-600 border-stone-300 rounded focus:ring-amber-500 cursor-pointer">
+                    <label for="skill-investigation" class="ml-3 block text-sm font-medium text-stone-900 cursor-pointer">Investigation</label>
+                    <span class="ml-2 text-xs text-stone-500 font-mono">(INT)</span>
+                </div>
+                <div class="text-lg font-bold text-stone-700 w-8 text-right" id="total-investigation">+0</div>
+            </div>
+
+            <div class="flex items-center justify-between p-2 hover:bg-stone-50 rounded-md border-b border-stone-100">
+                <div class="flex items-center">
+                    <input type="checkbox" id="skill-medicine" class="h-4 w-4 text-amber-600 border-stone-300 rounded focus:ring-amber-500 cursor-pointer">
+                    <label for="skill-medicine" class="ml-3 block text-sm font-medium text-stone-900 cursor-pointer">Medicine</label>
+                    <span class="ml-2 text-xs text-stone-500 font-mono">(WIS)</span>
+                </div>
+                <div class="text-lg font-bold text-stone-700 w-8 text-right" id="total-medicine">+0</div>
+            </div>
+
+            <div class="flex items-center justify-between p-2 hover:bg-stone-50 rounded-md border-b border-stone-100">
+                <div class="flex items-center">
+                    <input type="checkbox" id="skill-nature" class="h-4 w-4 text-amber-600 border-stone-300 rounded focus:ring-amber-500 cursor-pointer">
+                    <label for="skill-nature" class="ml-3 block text-sm font-medium text-stone-900 cursor-pointer">Nature</label>
+                    <span class="ml-2 text-xs text-stone-500 font-mono">(INT)</span>
+                </div>
+                <div class="text-lg font-bold text-stone-700 w-8 text-right" id="total-nature">+0</div>
+            </div>
+
+            <div class="flex items-center justify-between p-2 hover:bg-stone-50 rounded-md border-b border-stone-100">
+                <div class="flex items-center">
+                    <input type="checkbox" id="skill-perception" class="h-4 w-4 text-amber-600 border-stone-300 rounded focus:ring-amber-500 cursor-pointer">
+                    <label for="skill-perception" class="ml-3 block text-sm font-medium text-stone-900 cursor-pointer">Perception</label>
+                    <span class="ml-2 text-xs text-stone-500 font-mono">(WIS)</span>
+                </div>
+                <div class="text-lg font-bold text-stone-700 w-8 text-right" id="total-perception">+0</div>
+            </div>
+
+            <div class="flex items-center justify-between p-2 hover:bg-stone-50 rounded-md border-b border-stone-100">
+                <div class="flex items-center">
+                    <input type="checkbox" id="skill-performance" class="h-4 w-4 text-amber-600 border-stone-300 rounded focus:ring-amber-500 cursor-pointer">
+                    <label for="skill-performance" class="ml-3 block text-sm font-medium text-stone-900 cursor-pointer">Performance</label>
+                    <span class="ml-2 text-xs text-stone-500 font-mono">(CHA)</span>
+                </div>
+                <div class="text-lg font-bold text-stone-700 w-8 text-right" id="total-performance">+0</div>
+            </div>
+
+            <div class="flex items-center justify-between p-2 hover:bg-stone-50 rounded-md border-b border-stone-100">
+                <div class="flex items-center">
+                    <input type="checkbox" id="skill-persuasion" class="h-4 w-4 text-amber-600 border-stone-300 rounded focus:ring-amber-500 cursor-pointer">
+                    <label for="skill-persuasion" class="ml-3 block text-sm font-medium text-stone-900 cursor-pointer">Persuasion</label>
+                    <span class="ml-2 text-xs text-stone-500 font-mono">(CHA)</span>
+                </div>
+                <div class="text-lg font-bold text-stone-700 w-8 text-right" id="total-persuasion">+0</div>
+            </div>
+
+            <div class="flex items-center justify-between p-2 hover:bg-stone-50 rounded-md border-b border-stone-100">
+                <div class="flex items-center">
+                    <input type="checkbox" id="skill-religion" class="h-4 w-4 text-amber-600 border-stone-300 rounded focus:ring-amber-500 cursor-pointer">
+                    <label for="skill-religion" class="ml-3 block text-sm font-medium text-stone-900 cursor-pointer">Religion</label>
+                    <span class="ml-2 text-xs text-stone-500 font-mono">(INT)</span>
+                </div>
+                <div class="text-lg font-bold text-stone-700 w-8 text-right" id="total-religion">+0</div>
+            </div>
+
+            <div class="flex items-center justify-between p-2 hover:bg-stone-50 rounded-md border-b border-stone-100">
+                <div class="flex items-center">
+                    <input type="checkbox" id="skill-sleight-of-hand" class="h-4 w-4 text-amber-600 border-stone-300 rounded focus:ring-amber-500 cursor-pointer">
+                    <label for="skill-sleight-of-hand" class="ml-3 block text-sm font-medium text-stone-900 cursor-pointer">Sleight of Hand</label>
+                    <span class="ml-2 text-xs text-stone-500 font-mono">(DEX)</span>
+                </div>
+                <div class="text-lg font-bold text-stone-700 w-8 text-right" id="total-sleight-of-hand">+0</div>
+            </div>
+
+            <div class="flex items-center justify-between p-2 hover:bg-stone-50 rounded-md border-b border-stone-100">
+                <div class="flex items-center">
+                    <input type="checkbox" id="skill-stealth" class="h-4 w-4 text-amber-600 border-stone-300 rounded focus:ring-amber-500 cursor-pointer">
+                    <label for="skill-stealth" class="ml-3 block text-sm font-medium text-stone-900 cursor-pointer">Stealth</label>
+                    <span class="ml-2 text-xs text-stone-500 font-mono">(DEX)</span>
+                </div>
+                <div class="text-lg font-bold text-stone-700 w-8 text-right" id="total-stealth">+0</div>
+            </div>
+
+            <div class="flex items-center justify-between p-2 hover:bg-stone-50 rounded-md border-b border-stone-100">
+                <div class="flex items-center">
+                    <input type="checkbox" id="skill-survival" class="h-4 w-4 text-amber-600 border-stone-300 rounded focus:ring-amber-500 cursor-pointer">
+                    <label for="skill-survival" class="ml-3 block text-sm font-medium text-stone-900 cursor-pointer">Survival</label>
+                    <span class="ml-2 text-xs text-stone-500 font-mono">(WIS)</span>
+                </div>
+                <div class="text-lg font-bold text-stone-700 w-8 text-right" id="total-survival">+0</div>
+            </div>
+
         </div>
     </div>
 </div>

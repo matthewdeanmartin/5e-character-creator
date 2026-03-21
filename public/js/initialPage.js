@@ -79,7 +79,7 @@ export function bindInitialPageInputs(character) {
         // Grab the 'value' (the API index) directly from the select element
         const selectedValue = event.target.value; 
 
-        // Fetch and apply the new full class object
+        // Fetch and apply the full class object
         await character.applyClass(selectedValue);
     });
     
@@ -87,7 +87,7 @@ export function bindInitialPageInputs(character) {
         // Grab the 'value' (the API index) directly from the select element
         const selectedValue = event.target.value; 
 
-        // Fetch and apply the new full sub-race object
+        // Fetch and apply the full sub-race object
         await character.applySubRace(selectedValue);
     });
 

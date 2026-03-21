@@ -85,3 +85,22 @@ export function getAllSubRaces() {
 export function getSubRace(index) {
     return fetchFromApi(`/api/subraces/${index}`);
 }
+
+// --- Skills ---
+
+/**
+ * Fetches a list of all D&D skills.
+ * @returns {Promise<Array<object>>} A promise that resolves to an array of skill objects.
+ */
+export function getAllSkills() {
+    return fetchFromApi("/api/skills/");
+}
+
+/**
+ * Fetches the details for a single skill by its index.
+ * @param {string} index - The index of the skill (e.g., "intimidation")
+ * @returns {Promise<object>} A promise that resolves to a single skill object.
+ */
+export function getSkill(index) {
+    return fetchFromApi(`/api/skills/${index}`);
+}

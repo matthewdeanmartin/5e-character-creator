@@ -178,3 +178,27 @@ func GetClass(classIndex string) (models.ClassResult, error) {
 
 	return dndClass, nil
 }
+
+// --- SKILLS ---
+
+func GetSkills() ([]models.SkillResult, error) {
+	var skillsNil []models.SkillResult
+
+	skills, err := getAllDetails[models.SkillResult]("skills")
+	if err != nil {
+		return skillsNil, err
+	}
+
+	return skills, nil
+}
+
+func GetSkill(skillIndex string) (models.SkillResult, error) {
+	var skillNil models.SkillResult
+
+	skill, err := getDetails[models.SkillResult]("skills", skillIndex)
+	if err != nil {
+		return skillNil, err
+	}
+
+	return skill, nil
+}

@@ -4,6 +4,8 @@ import { bindInitialPageInputs, populateInitialDropdowns } from './initialPage.j
 
 import { bindAbilitiesPage } from './abilitiesPage.js';
 
+import { bindSkillsPage } from './skillsPage.js';
+
 // This is the "single source of truth" for character data
 let character;
 
@@ -93,8 +95,9 @@ async function initializePage(pageIndex) {
             bindAbilitiesPage(character);
             break;
         case 3:
-            // TODO: Create setup logic for "skills_3.html"
             console.log("Loaded Skills page");
+            // Bind the form inputs to the 'character' object
+            await bindSkillsPage(character);
             break;
     }
 }
@@ -156,7 +159,6 @@ function bindLandingButtons() {
     }
     if (btnLoad) {
         btnLoad.addEventListener('click', () => {
-            // TODO: Implement "Load Character" logic
             alert("Load Character functionality is not yet implemented.");
         });
     }

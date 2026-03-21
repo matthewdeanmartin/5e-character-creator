@@ -100,6 +100,12 @@ func main() {
 		dndapi.GetClass,
 	))
 
+	mux.HandleFunc("/api/skills/", createResourceHandler(
+		"/api/skills/",
+		dndapi.GetSkills,
+		dndapi.GetSkill,
+	))
+
 	// Serve static front-end files (HTML, CSS, JS)
 	// from a directory named 'public'.
 	fileServer := http.FileServer(http.Dir("./public"))

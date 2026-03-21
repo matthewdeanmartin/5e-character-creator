@@ -23,6 +23,7 @@ export class DndCharacter extends EventTarget {
             str: 8, dex: 8, con: 8,
             int: 8, wis: 8, cha: 8,
         };
+        this._skillProficiencies = {};
 
         // Track the individual components for UI persistence
         this._baseAbilityScores = { str: 8, dex: 8, con: 8, int: 8, wis: 8, cha: 8 };
@@ -48,6 +49,7 @@ export class DndCharacter extends EventTarget {
     get baseAbilityScores() { return this._baseAbilityScores; }
     get userAbilityBonuses() { return this._userAbilityBonuses; }
     get abilityScores() { return this._abilityScores; }
+    get skillProficiencies() { return this._skillProficiencies; }
 
     // --- Setters ---
     set charName(newName) {

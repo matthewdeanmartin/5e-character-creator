@@ -20,16 +20,36 @@ type AbilityBonus struct {
 	Bonus        int       `json:"bonus"`
 }
 
+// --- PROFICIENCY CHOICES TYPES ---
+
+type ReferenceOption struct {
+	OptionType string    `json:"option_type"`
+	Item       ApiResult `json:"item"`
+}
+
+type ProficiencyOptionSet struct {
+	OptionSetType string            `json:"option_set_type"`
+	Options       []ReferenceOption `json:"options"`
+}
+
+type ProficiencyChoice struct {
+	Desc   string               `json:"desc"`
+	Choose int                  `json:"choose"`
+	Type   string               `json:"type"`
+	From   ProficiencyOptionSet `json:"from"`
+}
+
 // --- TOP-LEVEL RESULT TYPES ---
 
 type ClassResult struct {
-	Index        string      `json:"index"`
-	Name         string      `json:"name"`
-	HitDie       int         `json:"hit_die"`
-	SavingThrows []ApiResult `json:"saving_throws"`
-	SubClasses   []ApiResult `json:"subclasses"`
-	URL          string      `json:"url"`
-	UpdatedAt    string      `json:"updated_at"`
+	Index              string              `json:"index"`
+	Name               string              `json:"name"`
+	HitDie             int                 `json:"hit_die"`
+	SavingThrows       []ApiResult         `json:"saving_throws"`
+	SubClasses         []ApiResult         `json:"subclasses"`
+	ProficiencyChoices []ProficiencyChoice `json:"proficiency_choices"`
+	URL                string              `json:"url"`
+	UpdatedAt          string              `json:"updated_at"`
 }
 
 type RaceResult struct {
@@ -65,4 +85,14 @@ type SubRaceResult struct {
 	RacialTraits   []ApiResult      `json:"racial_traits"`
 	URL            string           `json:"url"`
 	UpdatedAt      string           `json:"updated_at"`
+}
+
+// Skill Result Type
+type SkillResult struct {
+	Index        string    `json:"index"`
+	Name         string    `json:"name"`
+	Desc         []string  `json:"desc"`
+	AbilityScore ApiResult `json:"ability_score"`
+	URL          string    `json:"url"`
+	UpdatedAt    string    `json:"updated_at"`
 }

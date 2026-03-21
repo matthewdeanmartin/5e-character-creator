@@ -1,15 +1,58 @@
 /**
+ * Represents a reference item (like a specific skill or tool) inside a proficiency choice.
+ */
+export class DndReferenceOption {
+    constructor(data) {
+        if (!data) data = {};
+        this.optionType = data.option_type || "";
+        // item usually contains { index: "...", name: "...", url: "..." }
+        this.item = data.item || null; 
+    }
+}
+
+/**
+ * Represents the set of options a player can choose from.
+ */
+export class DndProficiencyOptionSet {
+    constructor(data) {
+        if (!data) data = {};
+        this.optionSetType = data.option_set_type || "";
+        this.options = (data.options || []).map(opt => new DndReferenceOption(opt));
+    }
+}
+
+/**
+ * Represents a choice the player gets to make (e.g., "Choose 2 from Acrobatics, Athletics...").
+ */
+export class DndProficiencyChoice {
+    constructor(data) {
+        if (!data) data = {};
+        this.desc = data.desc || "";
+        this.choose = data.choose || 0;
+        this.type = data.type || "";
+        this.from = data.from ? new DndProficiencyOptionSet(data.from) : null;
+    }
+}
+
+/**
  * @file dndModels.js
  * Mirrors the Go backend data structures.
  */
 
 export class DndClass {
     constructor(data) {
+        if (!data) data = {};
         this.index = data.index || "";
         this.name = data.name || "";
         this.hitDie = data.hit_die || 0;
         this.savingThrows = data.saving_throws || [];
         this.subClasses = data.subclasses || [];
+        
+        // Map the proficiency choices
+        this.proficiencyChoices = (data.proficiency_choices || []).map(
+            choice => new DndProficiencyChoice(choice)
+        );
+        
         this.url = data.url || "";
         this.updatedAt = data.updated_at || "";
     }
@@ -60,6 +103,21 @@ export class DndSubRace {
         this.desc = data.desc || "";
         this.abilityBonuses = data.ability_bonuses || [];
         this.racialTraits = data.racial_traits || [];
+        this.url = data.url || "";
+        this.updatedAt = data.updated_at || "";
+    }
+}
+
+/**
+ * Represents a single D&D Skill and its associated ability score.
+ */
+export class DndSkill {
+    constructor(data) {
+        if (!data) data = {};
+        this.index = data.index || "";
+        this.name = data.name || "";
+        this.desc = data.desc || [];
+        this.abilityScore = data.ability_score || null;
         this.url = data.url || "";
         this.updatedAt = data.updated_at || "";
     }

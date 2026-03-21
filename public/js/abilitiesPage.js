@@ -53,6 +53,10 @@ export function bindAbilitiesPage(character) {
         const racialVal = racialBonuses[stat] || 0;
         racialDisplay.textContent = racialVal;
 
+        // Restore the saved state from the character object
+        baseInput.value = character.baseAbilityScores[stat] !== undefined ? character.baseAbilityScores[stat] : 8;
+        userInput.value = character.userAbilityBonuses[stat] !== undefined ? character.userAbilityBonuses[stat] : 0;
+
         // Function to compute total and push it to the character object
         const updateTotal = () => {
             const baseVal = parseInt(baseInput.value, 10) || 0;
@@ -62,9 +66,11 @@ export function bindAbilitiesPage(character) {
             // Update UI
             totalDisplay.textContent = finalTotal;
 
+            // Save the separate parts back to the character
             character.baseAbilityScores[stat] = baseVal;
             character.userAbilityBonuses[stat] = userVal;
 
+            // Save the total 
             character._abilityScores[stat] = finalTotal;
                 
             // Allow other parts of the app to react to the ability score changing
