@@ -3,29 +3,27 @@ FROM golang:1.22-alpine AS builder
 
 WORKDIR /app
 
-COPY main.go .
+# Copy the Go module files and download dependencies
+COPY go.mod ./
 
-# We will copy the output 'main.wasm' file into the next image.
-RUN GOOS=js GOARCH=wasm go build -o main.wasm main.go
+# Copy the rest of the source code
+COPY . .
+
+# Build the native Go backend executable for Linux
+RUN CGO_ENABLED=0 GOOS=linux go build -o character-creator main.go
 
 # --- Stage 2: The Production Image ---
 FROM alpine:latest
 
-# Install Python for serving web files
-RUN apk add --no-cache python3
-
 WORKDIR /app
 
-# Copy front-end files
-COPY index.html .
-COPY main.js .
+# Copy the compiled Go binary from the builder stage
+COPY --from=builder /app/character-creator .
 
-# Copy the WebAssembly files from build stage
-COPY --from=builder /go/misc/wasm/wasm_exec.js .
-COPY --from=builder /app/main.wasm .
+COPY public/ ./public/
 
-# Expose port 8000 to the local machine
-EXPOSE 8000
+# Expose port 8080 to the local machine
+EXPOSE 8080
 
-# Starts a web server on localhost:8000 serving index.html
-CMD ["python3", "-m", "http.server", "8000"]
+# Starts the Go web server
+CMD ["./character-creator"]

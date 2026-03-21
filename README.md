@@ -1,40 +1,75 @@
 # Tabletop RPG Character Creator
 
-This project is a web-based character creator for tabletop roleplaying games. The core business logic is written in Go and compiled to WebAssembly (Wasm) to run directly in the browser. The user interface is a simple HTML and JavaScript shell.
+This project is an educational project I came up with to teach myself Go (and improve my JS proficiency). I chose to build a web-based character creator for tabletop roleplaying games, primarily focused on D&D 5th Edition. 
 
-This project uses Docker to create a consistent development and deployment environment, ensuring that it builds and runs the same way for all contributors.
+## Architecture & Tech Stack
+
+This application is built using the following tech stack:
+* **Go:** I used this because I wanted to get better with Go. I've heard that Go is great for setting up web servers, so I primarily use it as a way to simplify interacting with the [D&D 5E SRD API](https://5e-bits.github.io/docs/api).
+* **Tailwind CSS:** I used this to make the nightmare of styling, layout, and responsive design a little easier on my back-end engineer brain.
+* **JavaScript:** I used this to make it easier to build out complex background logic for the webpages.
 
 ## Prerequisities
 
-You must have the following software installed on your machine:
-- Docker Desktop (for Windows) or Docker Engine (for Linux)
+**If using Docker (Recommended):**
+* Docker Desktop (for Windows) or Docker Engine (for Linux/Mac)
 
-## Development Workflow 
+**If running locally without Docker:**
+* [Go 1.22+](https://go.dev/doc/install) installed on your machine.
+* PowerShell (for Windows users to use the provided helper scripts).
 
-All development should be done inside the development container. This container has the correct version of Go and all necessary tools pre-installed. The helper script `scripts/enterDevContainer.ps1` (for Windows PowerShell) will manage this process for you.
-- NOTE: You may need to set your execution policy if you haven't already: `Set-ExecutionPolicy RemoteSigned -Scope CurrentUser` 
+---
 
-Your project files are mounted directly into the container, so any changes you make with your local editor will be immediately reflected inside the container, and vice-versa.
+## Development Workflow
 
-The first time you run this, it will build the `char-creator-dev` Docker image which will automatically start up a container. On subsequent runs, it should use the already-running container. You will now be inside a shell within the container, at the /app directory and capable of running build scripts.
+You can develop and run this project in two ways: using the isolated Docker container (Option A) or running it directly on your local machine (Option B). 
 
-### Initial Setup
+### Option A: Using the Dev Container (Recommended)
+NOTE: Because we use volume mounts, any code changes you make in your local editor will instantly be reflected inside the container.
 
-The first time you enter the development container, you will need to fetch the Go Wasm JavaScript helper files. The helper script `scripts/fetchGoWasm.ps1` will manage this process for you.
+**1. Start the Dev Container**
+Open your terminal in the project root and run:
+`docker build -t char-dev-image -f Dockerfile.dev .`
+`docker run -d --name char-dev-container -p 8080:8080 -mount type=bind,source="${PWD}",target=/app char-dev-image`
 
-### Build the Wasm Module
+**2. Enter the Container**
+Attach your terminal to the running container:
+`docker exec -it char-dev-container bash`
 
-Whenever you make changes to `.go` source files, you need to recompile the WebAssembly module. The helper script `scripts/buildGo.sh` will do this for you.
+**3. Build and Run the App**
+We can build and run the app directly through Go commands:
+* To run the server directly: `go run main.go`
+* To compile a binary: `go build -o character-creator main.go` and run it with `./character-creator`
 
-## Run the Application for Testing
+The server will be accessible at `http://localhost:8080` on your host machine.
 
-To see your changes in action, you need to build and run the deployment container. This container runs a lightweight web server to serve your `index.html`, `main.wasm`, and JavaScript files.
+### Option B: Local Machine (Windows)
+If you have Go installed on your Windows machine, you can use the provided PowerShell scripts to easily compile and run the project.
 
-From your local machine's terminal (not inside the dev container), run the PowerShell deployment script `scripts/runDeployContainer.ps1` (for Windows PowerShell).
+**1. Build the Application**
+Open PowerShell, navigate to the project root, and run:
+`.\scripts\build.ps1`
+This script runs the `go build` command to compile the `main.go` file into a single executable file named `character-creator.exe`.
 
-This script will:
-1. Build a deployment image from `Dockerfile.deploy`.
-2. Stop and remove any old version of the application container.
-3. Start a new container in the background.
+**2. Run the Application**
+After building, start the server by running:
+`.\scripts\run.ps1`
+This script executes the application built by the build script. 
+Once running, it will output logs directly to your terminal and the server will be accessible at `http://localhost:8080`. 
+Press `Ctrl+C` to stop the server at any time.
 
-Once it's running, you can view the application by navigating to `http://localhost:8000` in your web browser.
+---
+
+## Production Deployment 
+
+Once you're satisfied with development, you can enjoy the website in its final state. You can use the deployment Docker container to package the required files.
+
+**1. Build the Production Image**
+From your local terminal, run:
+`docker build -t char-creator-prod -f Dockerfile.deploy .`
+
+**2. Run the Server**
+Start the container and map port 8080:
+`docker run -p 8080:8080 char-creator-prod`
+
+Once it is running, open your web browser and navigate to `http://localhost:8080` to interact with the character creator!

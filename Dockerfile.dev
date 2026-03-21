@@ -1,10 +1,9 @@
 # Official Go image based on Alpine
 FROM golang:1.22-alpine
 
+RUN apk add --no-cache bash git
+
 WORKDIR /app
 
-# Using --no-cache keeps the image layer small.
-RUN apk add --no-cache python3
-
-# Keep the container running indefinitely
+# Keep the container running indefinitely so it can be attached to
 CMD ["sleep", "infinity"]
