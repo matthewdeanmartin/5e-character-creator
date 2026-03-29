@@ -1,5 +1,4 @@
 # Setup and build outputs
-go.mod
 web/main.wasm
 *.exe
 
