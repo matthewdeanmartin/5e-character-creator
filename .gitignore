@@ -4,3 +4,4 @@ web/main.wasm
 
 # VS Code config files
 .vscode/*
+.idea
